@@ -3,15 +3,20 @@ header.header
   .container
     .header__wrapper
       .header__logo
-        a.logo(href="/homepage.pug")
-          +icon('icon-viber')
-      .header__menu
-        ul.header__menu__list
-          - var list = ["Point 1", "Point 2", "Point 3"]
-            each item in list
-              li
-                a.header__menu__link(href="#")=item
-      
-      .header__cta
+        a.logo(href="#")
+          +icon('ico-logo2')
+      ul.header__menu
+        li
+          a(href="#") Преимущества
+        li.is-active
+          a(href="#") Партнерам  
+        li
+          a(href="#") Про-боно
+        li
+          a(href="#") Зарегистрироваться
+        li
+          a(href="#") Войти
+          
+      .header__hamburger
         
 // HEADER :: END

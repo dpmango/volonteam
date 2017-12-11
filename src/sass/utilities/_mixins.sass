@@ -25,6 +25,9 @@
   .no-touch &:hover
     @content
 
+=tr($property: all)
+  transition: $property $transitionSpeed $ease
+  
 // retina, also available as +hdpi
 =retina
   @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)

@@ -6,6 +6,10 @@
   height: 100vh
   display: flex
   flex-direction: column
+  background: white
+  &--dark
+    background: $colorPrimary
+    color: white
   &-bg
     position: absolute
     top: 50%
@@ -16,7 +20,7 @@
     min-width: 100%
     height: auto
     width: auto
-  &-content
+  &-content, .container
     position: relative
     z-index: 2
     flex: 1 1 auto
@@ -25,3 +29,161 @@
   &__logo
     text-align: center
     margin: auto
+
+
+.p-title
+  font-size: 55px
+  line-height: 1.05
+  font-weight: 700
+  letter-spacing: -.46px
+  max-width: 760px
+
+.p-center-text
+  margin: auto
+  max-width: 560px
+  font-size: 30px
+  line-height: 1.5
+
+.t-orange
+  color: $colorOrange
+  border-bottom: 2px dashed $colorOrange
+
+
+.request-slider
+  margin-top: auto
+  margin-bottom: 5vh
+  .slick-track
+    display: flex !important
+    align-items: stretch
+
+
+/* request card
+.request-card
+  display: flex !important
+  flex-direction: column
+  position: relative
+  background: #FFFFFF
+  box-shadow: 0 1px 6px 0 rgba(37,122,134,0.33)
+  border-radius: 29px
+  color: $fontColor
+  text-align: center
+  padding: 30px 15px
+  max-width: 270px
+  margin: 25px
+  &__name
+    font-size: 25px
+  &__icon
+    margin-top: 20px
+    font-size: 56px
+    color: $colorPrimary
+
+  &__category
+    margin-top: 5px
+    color: $colorOrange
+    font-size: 15px
+
+  &__description
+    margin-top: 25px
+    font-size: 18px
+    font-weight: 300
+
+  &__cta
+    margin-top: 40px
+
+
+.benefits-wrap
+  display: flex
+  margin-top: auto
+  margin-bottom: 5vh
+
+/* Benefit card
+.benefit-card
+  display: flex
+  flex-direction: column
+  flex: 0 1 25%
+  padding: 15px 15px
+  width: 25%
+  text-align: center
+  &__icon
+    min-height: 55px
+  &__name
+    padding-top: 10px
+    font-size: 25px
+    letter-spacing: 1.11px
+    line-height: 1.1
+  &__description
+    margin-top: 25px
+    font-size: 18px
+    font-weight: 300
+    letter-spacing: 0.8px
+    line-height: 1.2
+
++r($tablet)
+  .benefit-card
+    flex-basis: 50%
+    width: 50%
+
+
+
+/* Pro bono
+.pro-bono-wrap
+  display: flex
+  margin-top: auto
+  margin-bottom: 5vh
+  color: $fontColor
+
+/* Benefit card
+.pro-bono-card
+  display: flex
+  flex-direction: column
+  flex: 0 1 25%
+  padding: 15px 15px
+  width: 25%
+  &__name
+    padding-top: 10px
+    font-size: 25px
+    letter-spacing: 1.11px
+    line-height: 1.1
+  &__description
+    margin-top: auto
+    padding-top: 25px
+    font-size: 15px
+    font-weight: 400
+    letter-spacing: 0
+    line-height: 1.46
+
+
++r($tablet)
+  .pro-bono-card
+    flex-basis: 50%
+    width: 50%
+
+
+/* quote
+.quote
+  margin: auto
+  &__text
+    position: relative
+    max-width: 1015px
+    padding-left: 200px
+    padding-right: 200px
+    margin-left: auto
+    margin-right: auto
+    font-size: 40px
+    line-height: 1.25
+    color: $colorOrange
+    &::before, &::after
+      position: absolute
+      top: 0%
+      display: inline-block
+      font-size: 450px
+      line-height: .2
+      color: $colorOrange
+      opacity: .5
+      // transform: translateY(-50%)
+    &::before
+      content: '«'
+      left: -20px
+    &::after
+      content: '»'
+      right: -20px

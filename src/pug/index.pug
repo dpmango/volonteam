@@ -5,10 +5,142 @@ bodyClass: homepage
 extends shared/_layout
 block content
   
-  
-  // SECTIONS
+  // SECTION
   .section
     img.section-bg(src='img/sectionHero.jpg' srcset='img/sectionHero@2x.jpg 2x')
-    .section-content
+    .container
       .section__logo
         include ../icons/logo.svg
+  
+  // SECTION
+  .section
+    .container
+      .p-title Хорошо делиться тем, <br> что делаешь хорошо
+      
+      .p-center-text Волонтим — это платформа для талантливых профессионалов любого возраста, которые хотят помогать организациям из <span class="t-orange" data-toggle="tooltip" data-placement="top" title="Третий сектор экономики состоит из различных организаций, решающих социально значимые проблемы.">третьего сектора*</a>
+  
+  // SECTION
+  .section.section--dark
+    .container
+      .p-title Актуальные <br> запросы от НКО
+      
+      // slider
+      .request-slider(js-slider)
+        .request-card
+          .request-card__name Фонд «РЭЙ»
+          .request-card__icon
+            i.icon.icon-fond-1
+          .request-card__category Редакутра
+          .request-card__description cмм, корректура, текст, cмм, корректура
+          .request-card__cta
+            a(href="#").btn.btn-primary
+              span помочь
+
+        //card
+        .request-card
+          .request-card__name Фонд «Подари жизнь»
+          .request-card__icon
+            i.icon.icon-fond-2
+          .request-card__category Комьюнити - менеджемнт
+          .request-card__description cмм, корректура, текст, cмм, корректура
+          .request-card__cta
+            a(href="#").btn.btn-primary
+              span помочь
+        //card
+        .request-card
+          .request-card__name Фонд Кораблик
+          .request-card__icon
+            i.icon.icon-fond-3
+          .request-card__category Дизайн
+          .request-card__description cмм, корректура, текст, cмм, корректура
+          .request-card__cta
+            a(href="#").btn.btn-primary
+              span помочь
+        //card
+        .request-card
+          .request-card__name Фонд «РЭЙ»
+          .request-card__icon
+            i.icon.icon-fond-1
+          .request-card__category Редакутра
+          .request-card__description cмм, корректура, текст, cмм, корректура
+          .request-card__cta
+            a(href="#").btn.btn-primary
+              span помочь
+        
+        
+        
+  // SECTION
+  .section
+    .container
+      .p-title Теперь вы можете помогать неккомерческим организациям в удобном для вас режиме 
+      
+      .benefits-wrap
+        //card
+        .benefit-card
+          .benefit-card__icon
+            i.icon.icon-benefits-1
+          .benefit-card__name Быстрое взаимо-действие без лишней волокиты
+          .benefit-card__description Вы сможете решать интересные задачи не выходя из мессенджера
+        //card
+        .benefit-card
+          .benefit-card__icon
+            i.icon.icon-benefits-2
+          .benefit-card__name Наши НКО знают чего хотят
+          .benefit-card__description Формализация работы: система брифов и участие менеджера
+        //card
+        .benefit-card
+          .benefit-card__icon
+            i.icon.icon-benefits-3
+          .benefit-card__name Вы 100% приносите пользу обществу (максимальный КПД)
+          .benefit-card__description Верификация НКО + выбор “любимых” сфер деятельности + прозрачная история на платформе
+        //card
+        .benefit-card
+          .benefit-card__icon
+            i.icon.icon-benefits-4
+          .benefit-card__name Экспертиза…..признание
+          .benefit-card__description Каждая консультация повышает ваш рейтинг станьте лучшим волонтером в своей отрасли + Отчетность, кейсы / PR
+
+  // SECTION
+  .section
+    img.section-bg(src='img/sectionPartners.jpg' srcset='img/sectionPartners@2x.jpg 2x')
+    
+    .container
+      .p-title Блок для <br> партнеров
+  
+  // SECTION
+  .section.section--dark
+    .container
+      .p-title Вопросы о про-боно
+      
+      .pro-bono-wrap
+        .pro-bono-card
+          .pro-bono-card__name Зачем вообще помогать НКО? (тем более бесплатно)
+          .pro-bono-card__description Некоммерческие организации - необходимый фактор роста любой экономики. Учитывая уровень жизни и несостоятельность чиновников, в России они играют еще большую роль. Но сами НКО справляются далеко не со всеми задачами. Поэтому поделиться с ними своей экспертизой - лучший способ изменить к лучшему жизнь для всех нас. Кроме того, вы получите интересные задачи, портфолио и связи.
+        // card
+        .pro-bono-card
+          .pro-bono-card__name Что если НКО не особо нуждается в моих знаниях?
+          .pro-bono-card__description Мы прикладываем большие усилия к тому, чтобы энергия специалистов не уходила в песок. В первую очередь помогают брифы: если НКО не приложит минимальных усилий, чтобы описать задачу, она просто не сможет отправить запрос. Во-вторых мы прикладываем большие усилия к тому, чтобы стыковать специалистов и НКО с общими ценностями, у которых могут развиться долгосрочные отношения. Кроме того, мы отслеживаем как НКО решает задачу уже после консультации. Это помогает отделить трудолюбивых ребят от пассажиров.
+          
+        //card
+        .pro-bono-card
+          .pro-bono-card__name Чем ваша платформа отличается от HH / Youdo?
+          .pro-bono-card__description Мы стараемся сделать так, чтобы каждый специалист тратил ровно столько времени, сколько ему комфортно. Наши чатботы сами по себе экономят время, кроме того вы можете установить максимальное количество часов в месяц и удобные дни недели и часы для консультаций.
+          
+        //card
+        .pro-bono-card
+          .pro-bono-card__name Какой смысл ввязываться, если у меня почти нет времени?
+          .pro-bono-card__description Некоммерческие организации - необходимый фактор роста любой экономики. Учитывая уровень жизни и несостоятельность чиновников, в России они играют еще бОльшую роль. Но сами НКО справляются далеко не со всеми задачами. Поэтому поделиться с ними своей экспертизой - лучший способ изменить к лучшему жизнь для всех нас. Кроме того, вы получите интересные задачи, портфолио и связи.
+
+  // SECTION
+  .section
+    .container
+      .p-title Актуальные <br> запросы от НКО
+      
+      .quote
+        .quote__text цитата Только так можно <br> создать общество, в котором <br> будет приятно жить цитата 
+      
+
+  // SECTION
+  .section.section--dark
+    .container
+      .p-title Частью третьего сектора может быть каждый

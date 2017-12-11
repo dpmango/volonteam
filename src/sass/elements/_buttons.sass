@@ -3,6 +3,7 @@ button
   -webkit-apperance: none
   border: 0
   box-shadow: none
+  cursor: pointer
   &:focus
     outline: none
 
@@ -16,3 +17,38 @@ button
   &--block
     display: block
     width: 100%
+
+  &-primary
+    overflow: hidden
+    color: white
+    font-size: 16px
+    font-weight: 500
+    padding: 8px 15px
+    letter-spacing: 0.71px
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.10)
+    border-radius: 50px
+    &::after
+      display: inline-block
+      content: ' '
+      position: absolute
+      z-index: 1
+      top: 50%
+      left: 50%
+      transform: translate(-50%,-50%)
+      width: 110%
+      height: 110%
+      // opacity: 0
+      pointer-events: none
+      background: $colorPrimary
+      border-radius: 50px
+      +tr
+    span
+      position: relative
+      z-index: 2
+
+    &:hover
+      color: $colorPrimary
+      &::after
+        opacity: 0
+        width: 10%
+        height: 10%

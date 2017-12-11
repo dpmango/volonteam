@@ -49,7 +49,6 @@ $(document).ready(function(){
   // Viewport units buggyfill
   window.viewportUnitsBuggyfill.init({
     force: true,
-    hacks: window.viewportUnitsBuggyfillHacks,
     refreshDebounceWait: 250,
     appendToBody: true
   });
@@ -138,26 +137,20 @@ $(document).ready(function(){
   });
 
 
-  // VIDEO PLAY
-  $('.promo-video .icon').on('click', function(){
-    $(this).closest('.promo-video').toggleClass('playing');
-    $(this).closest('.promo-video').find('iframe').attr("src", $("iframe").attr("src").replace("autoplay=0", "autoplay=1"));
-  });
-
-
   //////////
   // SLIDERS
   //////////
 
-  $('.trending__wrapper').slick({
+  $('[js-slider]').slick({
     autoplay: true,
     dots: false,
+    margin: 25,
     arrows: false,
-    infinite: true,
+    infinite: false,
     speed: 300,
-    slidesToShow: 1,
-    centerMode: true,
-    variableWidth: true
+    slidesToShow: 3,
+    centerMode: false,
+    variableWidth: false
   });
 
   //////////
@@ -231,6 +224,10 @@ $(document).ready(function(){
   ////////////
   // UI
   ////////////
+
+  // Tooltip - bootstrap 3 UI
+  $('[data-toggle="tooltip"]').tooltip()
+
 
   // custom selects
   $('.ui-select__visible').on('click', function(e){

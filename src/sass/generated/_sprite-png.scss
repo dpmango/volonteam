@@ -1,11 +1,65 @@
 $sprite: (
-	logo: (
+	benefits-1: (
+		offset-x: -133px,
+		offset-y: 0px,
+		width: 62px,
+		height: 43px,
+		total-width: 195px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	benefits-2: (
+		offset-x: -133px,
+		offset-y: -53px,
+		width: 40px,
+		height: 38px,
+		total-width: 195px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	benefits-3: (
+		offset-x: 0px,
+		offset-y: -132px,
+		width: 90px,
+		height: 26px,
+		total-width: 195px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	benefits-4: (
+		offset-x: -66px,
+		offset-y: -66px,
+		width: 32px,
+		height: 38px,
+		total-width: 195px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	fond-1: (
+		offset-x: -67px,
+		offset-y: 0px,
+		width: 56px,
+		height: 56px,
+		total-width: 195px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	fond-2: (
+		offset-x: 0px,
+		offset-y: -66px,
+		width: 56px,
+		height: 56px,
+		total-width: 195px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	fond-3: (
 		offset-x: 0px,
 		offset-y: 0px,
-		width: 300px,
-		height: 70px,
-		total-width: 300px,
-		total-height: 70px,
+		width: 57px,
+		height: 56px,
+		total-width: 195px,
+		total-height: 158px,
 		image: '../img/sprite.png'
 	),
 );
@@ -64,6 +118,24 @@ $sprite: (
 
 
 
-	.icon-logo {
-		@include sprite(logo)
+	.icon-benefits-1 {
+		@include sprite(benefits-1)
+	}
+	.icon-benefits-2 {
+		@include sprite(benefits-2)
+	}
+	.icon-benefits-3 {
+		@include sprite(benefits-3)
+	}
+	.icon-benefits-4 {
+		@include sprite(benefits-4)
+	}
+	.icon-fond-1 {
+		@include sprite(fond-1)
+	}
+	.icon-fond-2 {
+		@include sprite(fond-2)
+	}
+	.icon-fond-3 {
+		@include sprite(fond-3)
 	}

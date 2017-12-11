@@ -1,0 +1,14 @@
+---
+title: Homepage title
+bodyClass: homepage
+---
+extends shared/_layout
+block content
+  i.icon.icon-logo
+    
+  // iteration example
+  .socials
+    - var socials = ['email']
+      each social in socials
+        a(class="social-share" href="#" role="button")
+          +icon('ico-'+social)

@@ -96,28 +96,25 @@ $(document).ready(function(){
   _window.resized(100, revealFooter);
 
   // HEADER SCROLL
-  // add .header-static for .page or body
-  // to disable sticky header
-  if ( $('.header-static').length == 0 ){
-    _window.scrolled(10, function() { // scrolled is a constructor for scroll delay listener
-      var vScroll = _window.scrollTop();
-      var header = $('.header').not('.header--static');
-      var headerHeight = header.height();
-      var heroHeight = $('.hero').outerHeight() - headerHeight;
+  _window.on('scroll', throttle(function() { // scrolled is a constructor for scroll delay listener
+    var vScroll = _window.scrollTop();
+    var header = $('.header')
+    var headerHeight = header.height();
+    var heroHeight = $('.section').first().outerHeight() - headerHeight;
 
-      if ( vScroll > headerHeight ){
-        header.addClass('header--transformed');
-      } else {
-        header.removeClass('header--transformed');
-      }
+    // if ( vScroll > headerHeight ){
+    //   header.addClass('header--transformed');
+    // } else {
+    //   header.removeClass('header--transformed');
+    // }
 
-      if ( vScroll > heroHeight ){
-        header.addClass('header--fixed');
-      } else {
-        header.removeClass('header--fixed');
-      }
-    });
-  }
+    if ( vScroll > heroHeight ){
+      header.addClass('is-fixed');
+    } else {
+      header.removeClass('is-fixed');
+    }
+  },10));
+
 
   // HAMBURGER TOGGLER
   $('.hamburger').on('click', function(){
@@ -136,19 +133,27 @@ $(document).ready(function(){
     }
   });
 
+  //////////
+  // FULLPAGE
+  //////////
 
   //////////
   // SLIDERS
   //////////
 
+  var slickNextArrow = '<div class="slick-prev"><svg class="ico ico-slick-prev"><use xlink:href="img/sprite.svg#ico-slick-prev"></use></svg></div>';
+  var slickPrevArrow = '<div class="slick-next"><svg class="ico ico-slick-next"><use xlink:href="img/sprite.svg#ico-slick-next"></use></svg></div>'
+
   $('[js-slider]').slick({
-    autoplay: true,
+    autoplay: false,
     dots: false,
-    margin: 25,
-    arrows: false,
+    arrows: true,
+    prevArrow: slickNextArrow,
+    nextArrow: slickPrevArrow,
     infinite: false,
     speed: 300,
     slidesToShow: 3,
+    slidesToScroll: 1,
     centerMode: false,
     variableWidth: false
   });
@@ -183,7 +188,7 @@ $(document).ready(function(){
 
   // Magnific Popup
   // var startWindowScroll = 0;
-  $('.js-popup').magnificPopup({
+  $('[js-popup]').magnificPopup({
     type: 'inline',
     fixedContentPos: true,
     fixedBgPos: true,

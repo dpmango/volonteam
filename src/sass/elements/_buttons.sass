@@ -4,6 +4,7 @@ button
   border: 0
   box-shadow: none
   cursor: pointer
+  background: transparent
   &:focus
     outline: none
 
@@ -27,6 +28,7 @@ button
     letter-spacing: 0.71px
     box-shadow: 0 1px 1px 0 rgba(0,0,0,0.10)
     border-radius: 50px
+    transform: translate3d(0,0,0)
     &::after
       display: inline-block
       content: ' '
@@ -52,3 +54,10 @@ button
         opacity: 0
         width: 10%
         height: 10%
+    &.btn-white
+      color: $colorPrimary
+      &::after
+        background-color: white
+      &:hover
+        color: white
+        background-color: $colorOrange

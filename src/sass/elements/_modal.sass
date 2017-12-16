@@ -10,14 +10,34 @@ html.mfp-helper
     height: 100%
     -webkit-transform: translateZ(0)
 
-#small-dialog
-  background: white
-  padding: 20px 30px
-  text-align: left
-  max-width: 600px
+.popup-dialog
+  max-width: 420px
   margin: 40px auto
   position: relative
+  padding: 100px 20px 30px 20px
+  text-align: left
+  background: $colorPrimary
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.15)
+  border-radius: 32px
+  .mfp-close
+    background: white
+    border-radius: 50%
+    opacity: 1
+    size: 55px
+    top: 20px
+    right: 20px
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10)
+    color: $colorPrimary
+    font-size: 50px
+    +tr
+    &:hover
+      box-shadow: none
+      opacity: .7
 
+.popup-form
+  &__cta
+    margin-top: 30px
+    text-align: center
 
 // Fade-zoom animation for first dialog
 
@@ -33,7 +53,7 @@ html.mfp-helper
     transform: scale(0.8)
     opacity: 0
   &.mfp-bg
-    background: $colorGreen
+    background: rgba($colorPrimary, .5)
     opacity: 0
     transition: opacity 0.3s $ease
   &.mfp-ready.mfp-bg

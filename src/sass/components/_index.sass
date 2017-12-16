@@ -9,7 +9,6 @@
   background: white
   &--dark
     background: $colorPrimary
-    color: white
   &-bg
     position: absolute
     top: 50%
@@ -17,7 +16,8 @@
     z-index: 1
     transform: translate(-50%,-50%)
     min-width: 100%
-    min-width: 100%
+    min-height: 100%
+    object-fit: cover
     height: auto
     width: auto
   &-content, .container
@@ -37,6 +37,9 @@
   font-weight: 700
   letter-spacing: -.46px
   max-width: 760px
+  margin-top: 25px
+  &--white
+    color: white
 
 .p-center-text
   margin: auto
@@ -48,18 +51,96 @@
   color: $colorOrange
   border-bottom: 2px dashed $colorOrange
 
+.cta-buttons
+  display: flex
+  justify-content: flex-end
+  align-items: stretch
+  margin-bottom: 5vh
 
+.cta-choice
+  display: inline-block
+  cursor: pointer
+  margin-right: 25px
+  &__trigger
+    display: flex
+    align-items: center
+    padding: 8px 12px 8px 40px
+    background: $colorOrange
+    border-radius: 50px
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10)
+    +tr
+    span
+      font-size: 16px
+      letter-spacing: 0.71px
+      line-height: 1.18
+    &-icon
+      display: flex
+      align-items: center
+      justify-content: center
+      background: white
+      size: 55px
+      margin-left: 20px
+      border-radius: 50%
+      box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10)
+      font-size: 28px
+      color: $colorOrange
+
+.cta-help
+  background: $colorPrimary
+  display: flex
+  align-items: center
+  text-align: center
+  border-radius: 50px
+  cursor: pointer
+  box-shadow: 0 1px 6px 0 rgba(0,0,0,0.10)
+  +tr
+  span
+    font-size: 16px
+    letter-spacing: 0.71px
+    line-height: 1.18
+    padding: 20px 50px
+    border-radius: 50%
+
+
+/* request slider
 .request-slider
   margin-top: auto
   margin-bottom: 5vh
+  padding-left: 90px
+  padding-right: 90px
   .slick-track
     display: flex !important
-    align-items: stretch
+    // align-items: stretch
 
+  .slick-next, .slick-prev
+    display: flex
+    align-items: center
+    justify-content: center
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    font-size: 20px
+    color: $colorPrimary
+    background: white
+    border-radius: 50%
+    size: 55px
+    box-shadow: 0 1px 4px 0 rgba(37,122,134,0.15)
+    cursor: pointer
+    +tr
+    &:hover
+      box-shadow: none
+      transform: translateY(-50%) scale(1.2)
+      // font-size: 16px
+
+  .slick-next
+    right: 0
+  .slick-prev
+    left: 0
 
 /* request card
 .request-card
   display: flex !important
+  height: auto !important
   flex-direction: column
   position: relative
   background: #FFFFFF
@@ -69,27 +150,36 @@
   text-align: center
   padding: 30px 15px
   max-width: 270px
-  margin: 25px
+  margin: 25px 12px
+  +tr
+  &:hover
+    box-shadow: none
+
   &__name
     font-size: 25px
+    margin-top: auto
   &__icon
     margin-top: 20px
     font-size: 56px
     color: $colorPrimary
 
   &__category
-    margin-top: 5px
-    color: $colorOrange
+    margin-top: 0px
+    // color: $colorOrange
     font-size: 15px
 
   &__description
-    margin-top: 25px
+    margin-top: 20px
     font-size: 18px
     font-weight: 300
 
   &__cta
     margin-top: 40px
 
+
+
+
+/* benefits
 
 .benefits-wrap
   display: flex
@@ -101,7 +191,7 @@
   display: flex
   flex-direction: column
   flex: 0 1 25%
-  padding: 15px 15px
+  padding: 15px 2%
   width: 25%
   text-align: center
   &__icon
@@ -136,16 +226,16 @@
 .pro-bono-card
   display: flex
   flex-direction: column
-  flex: 0 1 25%
-  padding: 15px 15px
-  width: 25%
+  flex: 0 1 33%
+  padding: 15px 2%
+  width: 33%
   &__name
     padding-top: 10px
     font-size: 25px
     letter-spacing: 1.11px
     line-height: 1.1
+    min-height: 90px
   &__description
-    margin-top: auto
     padding-top: 25px
     font-size: 15px
     font-weight: 400
@@ -187,3 +277,64 @@
     &::after
       content: '»'
       right: -20px
+
+
+/* CTA
+.cta-form
+  flex: 0 1 auto
+  display: flex
+  flex-direction: column
+  margin-top: auto
+  margin-bottom: 10vh
+  max-width: 570px
+  margin-left: auto
+  margin-right: auto
+  &__head
+    font-size: 30px
+    line-height: 1.2
+
+  &__capture
+    display: flex
+    flex-direction: column
+    position: relative
+    z-index: 1
+    height: 67px
+    margin-top: 15vh
+    border-radius: 50px
+    overflow: hidden
+    input
+      flex: 1 1 auto
+      display: block
+      width: 100%
+      -webkit-appearance: none
+      background: rgba(white, .7)
+      color: $fontColor
+      border: 1px solid $borderColor
+      border-radius: 40px
+      padding: 8px 250px 8px 30px
+      font-size: 18px
+      letter-spacing: .8px
+      box-shadow: 0 1px 6px 0 rgba(0,0,0,0.10)
+      +tr
+      &::placeholder
+        color: rgba($fontColor, .3)
+      &:focus
+        background-color: white
+    button
+      -webkit-apperance: none
+      position: absolute
+      top: 0
+      bottom: 0
+      right: 0
+      width: 220px
+      background: white
+      border-radius: 50px
+      font-size: 16px
+      letter-spacing: 0.71px
+      font-weight: 500
+      box-shadow: 0 1px 6px 0 rgba(0,0,0,0.10)
+      +tr
+
+      &:hover
+        background-color: $colorOrange
+        color: white

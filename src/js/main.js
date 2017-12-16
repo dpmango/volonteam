@@ -67,46 +67,12 @@ $(document).ready(function(){
         return false;
 	});
 
-  // FOOTER REVEAL
-  function revealFooter() {
-    var footer = $('[js-reveal-footer]');
-    if (footer.length > 0) {
-      var footerHeight = footer.outerHeight();
-      var maxHeight = _window.height() - footerHeight > 100;
-      if (maxHeight && !msieversion() ) {
-        $('body').css({
-          'margin-bottom': footerHeight
-        });
-        footer.css({
-          'position': 'fixed',
-          'z-index': -10
-        });
-      } else {
-        $('body').css({
-          'margin-bottom': 0
-        });
-        footer.css({
-          'position': 'static',
-          'z-index': 10
-        });
-      }
-    }
-  }
-  revealFooter();
-  _window.resized(100, revealFooter);
-
   // HEADER SCROLL
   _window.on('scroll', throttle(function() { // scrolled is a constructor for scroll delay listener
     var vScroll = _window.scrollTop();
     var header = $('.header')
     var headerHeight = header.height();
     var heroHeight = $('.section').first().outerHeight() - headerHeight;
-
-    // if ( vScroll > headerHeight ){
-    //   header.addClass('header--transformed');
-    // } else {
-    //   header.removeClass('header--transformed');
-    // }
 
     if ( vScroll > heroHeight ){
       header.addClass('is-fixed');
@@ -139,6 +105,7 @@ $(document).ready(function(){
 
   var sections = $('.section');
   var wHeight = _window.height();
+  var wHeightPrev = 0;
 
   function listenScroll(){
     var scrollTop = 0;
@@ -146,7 +113,7 @@ $(document).ready(function(){
     _window.on('wheel', function(e){
       // GET SCROLL PARAMS
       var delta = e.originalEvent.deltaY
-      var speedController = 2.4
+      var speedController = 2.4 // make it smooth
       if ( delta > 0 ){
         scrollTop = scrollTop + (delta / speedController)
       } else if ( delta < 0 ){
@@ -155,25 +122,31 @@ $(document).ready(function(){
 
       // prevent scrolling past top
       if ( scrollTop < 0){
+        scrollTop = 0
         return false
       }
 
       // don't scroll past bottom and reset val
       if ( scrollTop > (sections.length - 1) * wHeight ){
         scrollTop = (sections.length - 1) * wHeight
+
+        // scroll footer ?
       }
 
+      wHeightPrev = _window.height(); // update prevheight for reset calcultations
       scrollBy(Math.round(scrollTop))
 
       e.preventDefault();
 
     });
 
-    _window.on('resize', throttle(function(e){
+    _window.on('resize', debounce(function(e){
       wHeight = _window.height();
-      scrollBy(scrollTop)
-
-    }, 200));
+      resizeScroll(scrollTop);
+      setTimeout(function(){
+        wHeightPrev = _window.height(); // update prevheight for reset calcultations
+      }, 50)
+    }, 100));
   }
 
   function scrollBy(scrollTop){
@@ -214,17 +187,48 @@ $(document).ready(function(){
       logoLetters.css({
         'transform': 'scale('+sizePowerScaleInvert+')'
       })
-
     }
 
     // HEADER ANIMATION - scroll 80% of first screen
-    var whenHeaderMoves = (scrollTop / wHeight) + 1 > 1.8
+    // var whenHeaderMoves = (scrollTop / wHeight) + 1 > 1.8
+    var header = $('.header')
+    var whenHeaderMoves = Math.floor(scrollTop / ( wHeight - header.outerHeight() ) ) + 1
 
-    if ( whenHeaderMoves ){
-      $('.header').addClass('is-fixed');
-    } else {
-      $('.header').removeClass('is-fixed')
+    if ( whenHeaderMoves === 1 ){
+      header.removeClass('is-fixed');
+      header.css({
+        'transform': 'translate3d(0,-'+scrollTop+'px,0)'
+      })
+    } else if ( whenHeaderMoves > 1){
+      header.addClass('is-fixed');
+    } else if ( whenHeaderMoves < 1 ){
+      header.removeClass('is-fixed');
     }
+  }
+
+  function resizeScroll(scrollTop){
+    var nextSectionNum = Math.floor(scrollTop / wHeight) + 1;
+
+    sections.each(function(i, section){
+      if ( nextSectionNum < i ){
+        // clear all past current transforms
+        $(section).css({
+          'transform': 'translate3d(0px,0,0)'
+        })
+      } else if (nextSectionNum === i){
+        // normal scroll for current section
+        var changedHeight = scrollTop - (Math.abs(wHeightPrev - wHeight) * i)
+        console.log(changedHeight, $(section))
+        $(section).css({
+          'transform': 'translate3d(0,-'+changedHeight+'px,0)'
+        })
+      }else{
+
+        $(section).css({
+          'transform': 'translate3d(0,-'+ i * wHeight +'px,0)'
+        })
+      }
+    });
   }
 
   listenScroll();

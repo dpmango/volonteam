@@ -7,9 +7,9 @@
   z-index: 9
   background: #FFFFFF
   box-shadow: 0 1px 6px 0 rgba(0,0,0,0.15)
-  +tr
+  transition: transform .05s linear
   &.is-fixed
-    transform: translate3d(0,calc(-100vh + 70px),0)
+    transform: translate3d(0,calc(-100vh + 70px),0) !important
   &__wrapper
     display: flex
     align-items: center

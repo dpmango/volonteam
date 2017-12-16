@@ -7,14 +7,14 @@ block content
   
   
   // SECTION
-  .section
+  .section(data-section=1)
     img.section-bg(src='img/sectionHero.jpg' srcset='img/sectionHero@2x.jpg 2x')
     .container
-      .section__logo
+      .section__logo(js-scroll-logo)
         include ../icons/logo.svg
   
   // SECTION
-  .section
+  .section(data-section=2)
     .container
       .p-title Хорошо делиться тем, <br> что делаешь хорошо
       
@@ -30,7 +30,7 @@ block content
           span Помочь НКО
               
   // REQUEST :: START
-  .section.section--dark
+  .section.section--dark(data-section=3)
     .container
       .p-title.p-title--white Актуальные <br> запросы от НКО
       
@@ -81,7 +81,7 @@ block content
         
         
   // SECTION
-  .section
+  .section(data-section=4)
     .container
       .p-title Теперь вы можете помогать неккомерческим организациям в удобном для вас режиме 
       
@@ -112,14 +112,14 @@ block content
           .benefit-card__description Каждая успешная консультация повышает ваш рейтинг — вы можете стать лучшим волонтером в своей отрасли.
           
   // SECTION
-  .section
+  .section(data-section=5)
     img.section-bg(src='img/sectionPartners.jpg' srcset='img/sectionPartners@2x.jpg 2x')
     
     .container
       .p-title.p-title--white Блок для <br> партнеров
   
   // SECTION
-  .section.section--dark
+  .section.section--dark(data-section=6)
     .container
       .p-title.p-title--white Вопросы <br> о про-боно
       
@@ -138,7 +138,7 @@ block content
           .pro-bono-card__description Мы стараемся сделать так, чтобы каждый специалист тратил ровно столько времени, сколько ему комфортно. Наши чатботы сами по себе экономят время, кроме того вы можете установить максимальное количество часов в месяц и удобные дни недели и часы для консультаций.
     
   // QUOTES :: START
-  .section
+  .section(data-section=7)
     .container
 
       .quote
@@ -146,7 +146,7 @@ block content
       
 
   // SECTION
-  .section.section--dark
+  .section.section--dark(data-section=8)
     .container
       .p-title Частью третьего сектора может быть каждый
       

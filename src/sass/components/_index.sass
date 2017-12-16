@@ -1,12 +1,15 @@
 /* INDEX
 .section
+  flex-shrink: 0
   position: relative
+  z-index: 1
   overflow: hidden
   min-height: 500px
   height: 100vh
   display: flex
   flex-direction: column
   background: white
+  box-shadow: 0 -5px 10px 0 rgba(0,0,0,0.15)
   &--dark
     background: $colorPrimary
   &-bg
@@ -29,6 +32,11 @@
   &__logo
     text-align: center
     margin: auto
+    svg
+      #logo-dash
+        transform-origin: center center
+      #logo-letter
+        transform-origin: right center
 
 
 .p-title
@@ -37,7 +45,7 @@
   font-weight: 700
   letter-spacing: -.46px
   max-width: 760px
-  margin-top: 25px
+  margin-top: calc(15px + 70px)
   &--white
     color: white
 

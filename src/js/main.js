@@ -48,7 +48,7 @@ $(document).ready(function(){
 
   // Viewport units buggyfill
   window.viewportUnitsBuggyfill.init({
-    force: true,
+    force: false,
     refreshDebounceWait: 250,
     appendToBody: true
   });
@@ -117,25 +117,93 @@ $(document).ready(function(){
 
 
   // HAMBURGER TOGGLER
-  $('.hamburger').on('click', function(){
-    $('.hamburger').toggleClass('active');
+  $('[js-hamburger]').on('click', function(){
+    $(this).toggleClass('active');
     $('.mobile-navi').toggleClass('active');
   });
 
   // SET ACTIVE CLASS IN HEADER
   // * could be removed in production and server side rendering
   // user .active for li instead
-  $('.header__menu li').each(function(i,val){
-    if ( $(val).find('a').attr('href') == window.location.pathname.split('/').pop() ){
-      $(val).addClass('active');
-    } else {
-      $(val).removeClass('active')
-    }
-  });
+  // $('.header__menu li').each(function(i,val){
+  //   if ( $(val).find('a').attr('href') == window.location.pathname.split('/').pop() ){
+  //     $(val).addClass('active');
+  //   } else {
+  //     $(val).removeClass('active')
+  //   }
+  // });
 
   //////////
   // FULLPAGE
   //////////
+
+  var sections = $('.section');
+  var wHeight = _window.height();
+
+  function listenScroll(){
+    var scrollTop = 0;
+
+    _window.on('wheel', throttle(function(e){
+      // GET SCROLL PARAMS
+      var delta = e.originalEvent.deltaY
+      if ( delta > 0 ){
+        scrollTop = scrollTop + (delta / 2)
+      } else if ( delta < 0 ){
+        scrollTop = scrollTop - Math.abs(delta / 2)
+      }
+
+      // prevent scrolling past top
+      if ( scrollTop < 0 ){
+        return false
+      }
+
+      scrollBy(scrollTop)
+
+      e.preventDefault();
+
+    }, 1, {
+      'leading': true
+    }))
+
+    _window.on('resize', throttle(function(e){
+      wHeight = _window.height();
+      scrollBy(scrollTop)
+
+    }, 200));
+  }
+
+  function scrollBy(scrollTop){
+    // SECTION ACTIONS
+    var nextSectionNum = Math.floor(scrollTop / wHeight) + 1;
+    var nextSection = sections[nextSectionNum]
+    $(nextSection).css({
+      'transform': 'translate3d(0,-'+scrollTop+'px,0)'
+    })
+
+    if ( nextSectionNum === 1){
+      var logoDashes = $('[js-scroll-logo] svg #logo-dash')
+      var logoLetters = $('[js-scroll-logo] svg #logo-letter')
+      var sizePowerScale = 1 - (scrollTop / wHeight / 3)
+      var sizePowerX =  (scrollTop / wHeight) * 70
+
+      logoDashes.css({
+        'transform': 'scale('+sizePowerScale+')'
+      })
+
+      logoLetters.css({
+        'transform': 'translateX('+sizePowerX+'px)'
+      })
+
+    }
+
+    if ( nextSectionNum > 1){
+      $('.header').addClass('is-fixed');
+    } else {
+      $('.header').removeClass('is-fixed')
+    }
+  }
+
+  listenScroll();
 
   //////////
   // SLIDERS
@@ -161,30 +229,6 @@ $(document).ready(function(){
   //////////
   // MODALS
   //////////
-  // Custom modals
-  // $('*[data-modal]').on('click', function(){
-  //   // remove all active first
-  //   $('.modal').removeClass('opened');
-  //
-  //   // find by id
-  //   var target = $(this).data('modal');
-  //   $('#'+target).addClass('opened');
-  //
-  //   window.location.hash = target;
-  // });
-  //
-  // $('.modal__close').on('click', function(){
-  //   $(this).closest('.modal').removeClass('opened');
-  //   window.location.hash = "";
-  // });
-  //
-  // // CHECK SAVED STATE
-  // if(window.location.hash) {
-  //   var hash = window.location.hash.substring(1);
-  //   $('#'+hash).addClass('opened');
-  // }
-  //
-
 
   // Magnific Popup
   // var startWindowScroll = 0;
@@ -210,22 +254,6 @@ $(document).ready(function(){
     }
   });
 
-  // $('.popup-gallery').magnificPopup({
-	// 	delegate: 'a',
-	// 	type: 'image',
-	// 	tLoading: 'Loading image #%curr%...',
-	// 	mainClass: 'mfp-img-mobile',
-	// 	gallery: {
-	// 		enabled: true,
-	// 		navigateByImgClick: true,
-	// 		preload: [0,1]
-	// 	},
-	// 	image: {
-	// 		tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
-	// 	}
-	// });
-
-
   ////////////
   // UI
   ////////////
@@ -234,134 +262,9 @@ $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip()
 
 
-  // custom selects
-  $('.ui-select__visible').on('click', function(e){
-    var that = this
-    // hide parents
-    $(this).parent().parent().parent().find('.ui-select__visible').each(function(i,val){
-      if ( !$(val).is($(that)) ){
-        $(val).parent().removeClass('active')
-      }
-    });
-
-    $(this).parent().toggleClass('active');
-  });
-
-  $('.ui-select__dropdown span').on('click', function(){
-    // parse value and toggle active
-    var value = $(this).data('val');
-    if (value){
-      $(this).siblings().removeClass('active');
-      $(this).addClass('active');
-
-      // set visible
-      $(this).closest('.ui-select').removeClass('active');
-      $(this).closest('.ui-select').find('input').val(value);
-
-      $(this).closest('.ui-select').find('.ui-select__visible span').text(value);
-    }
-
-  });
-
-  // handle outside click
-  $(document).click(function (e) {
-    var container = new Array();
-    container.push($('.ui-select'));
-
-    $.each(container, function(key, value) {
-        if (!$(value).is(e.target) && $(value).has(e.target).length === 0) {
-            $(value).removeClass('active');
-        }
-    });
-  });
-
-  // numeric input
-  $('.ui-number span').on('click', function(e){
-    var element = $(this).parent().find('input');
-    var currentValue = parseInt($(this).parent().find('input').val()) || 0;
-
-    if( $(this).data('action') == 'minus' ){
-      if(currentValue <= 1){
-        return false;
-      }else{
-        element.val( currentValue - 1 );
-      }
-    } else if( $(this).data('action') == 'plus' ){
-      if(currentValue >= 99){
-        return false;
-      } else{
-        element.val( currentValue + 1 );
-      }
-    }
-  });
-
   // Masked input
   $(".js-dateMask").mask("99.99.99",{placeholder:"ДД.ММ.ГГ"});
   $("input[type='tel']").mask("+7 (000) 000-0000", {placeholder: "+7 (___) ___-____"});
 
-
-  ////////////
-  // SCROLLMONITOR - WOW LIKE
-  ////////////
-
-  var monitorActive = false;
-  window.runScrollMonitor = function(){
-    setTimeout(function(){
-
-      // require
-      if ( !monitorActive ){
-        monitorActive = true;
-        $('.wow').each(function(i, el){
-
-          var elWatcher = scrollMonitor.create( $(el) );
-
-          var delay;
-          if ( $(window).width() < 768 ){
-            delay = 0
-          } else {
-            delay = $(el).data('animation-delay');
-          }
-
-          var animationClass
-
-          if ( $(el).data('animation-class') ){
-            animationClass = $(el).data('animation-class');
-          } else {
-            animationClass = "wowFadeUp"
-          }
-
-          var animationName
-
-          if ( $(el).data('animation-name') ){
-            animationName = $(el).data('animation-name');
-          } else {
-            animationName = "wowFade"
-          }
-
-          elWatcher.enterViewport(throttle(function() {
-            $(el).addClass(animationClass);
-            $(el).css({
-              'animation-name': animationName,
-              'animation-delay': delay,
-              'visibility': 'visible'
-            });
-          }, 100, {
-            'leading': true
-          }));
-          elWatcher.exitViewport(throttle(function() {
-            $(el).removeClass(animationClass);
-            $(el).css({
-              'animation-name': 'none',
-              'animation-delay': 0,
-              'visibility': 'hidden'
-            });
-          }, 100));
-        });
-      }
-
-    },300);
-  }
-
-  runScrollMonitor();
 
 });

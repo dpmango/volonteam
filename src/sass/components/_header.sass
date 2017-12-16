@@ -1,16 +1,15 @@
 // HEADER
 .header
-  position: absolute
+  position: fixed
   bottom: 0
   left: 0
   right: 0
   z-index: 9
   background: #FFFFFF
   box-shadow: 0 1px 6px 0 rgba(0,0,0,0.15)
+  +tr
   &.is-fixed
-    position: fixed
-    top: 0
-    bottom: auto
+    transform: translate3d(0,calc(-100vh + 70px),0)
   &__wrapper
     display: flex
     align-items: center

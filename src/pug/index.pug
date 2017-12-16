@@ -24,8 +24,15 @@ block content
         .cta-choice
           .cta-choice__trigger
             span В чем Вы разбираетесь <br> по-настоящему хорошо?
-            .cta-choice__trigger-icon
+            .cta-choice__trigger-icon(js-cta-choice-trigger)
               +icon('ico-expand')
+              +icon('ico-close')
+          .cta-choice__options(js-cta-choice-options)
+            span В людях
+            span В собаках
+            span В стариках
+            span В котиках
+            span В молодеже
         .cta-help
           span Помочь НКО
               
@@ -36,7 +43,7 @@ block content
       
       .container-narrow
         // slider
-        .request-slider(js-slider)
+        .request-slider(js-slider-requests)
           .request-card
             .request-card__name Фонд «РЭЙ»
             .request-card__icon
@@ -113,11 +120,40 @@ block content
           
   // SECTION
   .section(data-section=5)
-    img.section-bg(src='img/sectionPartners.jpg' srcset='img/sectionPartners@2x.jpg 2x')
-    
-    .container
+    .container.no-pointers
       .p-title.p-title--white Блок для <br> партнеров
-  
+      a(href="#").presentation-btn
+        span Презентация
+        .presentation-btn__icon
+          +icon('ico-download')
+        
+    .slider(js-full-slider)
+      .slider-slide
+        img.section-bg(src='img/sectionPartners.jpg' srcset='img/sectionPartners@2x.jpg 2x')
+      .slider-slide
+        img.section-bg(src='img/sectionHero.jpg' srcset='img/sectionHero@2x.jpg 2x')
+      .slider-slide
+        img.section-bg(src='img/sectionPartners.jpg' srcset='img/sectionPartners@2x.jpg 2x')
+        
+    .slider-controls
+      .slider-control(data-slide="1").is-active
+        .slider-control__dot
+          img(src='img/partnerLogo_1.png' srcset='img/partnerLogo_1@2x.png 2x')
+      .slider-control(data-slide="2")
+        .slider-control__dot
+          img(src='img/partnerLogo_1.png' srcset='img/partnerLogo_1@2x.png 2x')
+      .slider-control(data-slide="3")
+        .slider-control__dot
+          img(src='img/partnerLogo_1.png' srcset='img/partnerLogo_1@2x.png 2x')
+      .slider-control(data-slide="4")
+        .slider-control__dot
+          img(src='img/partnerLogo_1.png' srcset='img/partnerLogo_1@2x.png 2x')
+      .slider-control(data-slide="5")
+        .slider-control__dot
+          img(src='img/partnerLogo_1.png' srcset='img/partnerLogo_1@2x.png 2x')
+            
+    
+        
   // SECTION
   .section.section--dark(data-section=6)
     .container
@@ -131,7 +167,6 @@ block content
         .pro-bono-card
           .pro-bono-card__name Что если НКО не особо нуждается в моих знаниях?
           .pro-bono-card__description Мы прикладываем большие усилия к тому, чтобы энергия специалистов не уходила в песок. В первую очередь помогают брифы: если НКО не приложит минимальных усилий, чтобы описать задачу, она просто не сможет отправить запрос. Во-вторых мы прикладываем большие усилия к тому, чтобы стыковать специалистов и НКО с общими ценностями, у которых могут развиться долгосрочные отношения. Кроме того, мы отслеживаем как НКО решает задачу уже после консультации. Это помогает отделить трудолюбивых ребят от пассажиров.
-          
         //card
         .pro-bono-card
           .pro-bono-card__name Какой смысл ввязываться, если у меня почти нет времени?
@@ -139,59 +174,42 @@ block content
     
   // QUOTES :: START
   .section(data-section=7)
-    .container
 
+    .slider(js-full-slider)
+      .quote
+        .quote__text цитата Только так можно <br> создать общество, в котором <br> будет приятно жить цитата 
       .quote
         .quote__text цитата Только так можно <br> создать общество, в котором <br> будет приятно жить цитата 
       
+    .slider-controls.slider-controls--orange
+      .slider-control(data-slide="1").is-active
+        .slider-control__dot
+          img(src='img/partnerLogo_1.png' srcset='img/partnerLogo_1@2x.png 2x')
+      .slider-control(data-slide="2")
+        .slider-control__dot
+          img(src='img/partnerLogo_1.png' srcset='img/partnerLogo_1@2x.png 2x')
+      .slider-control(data-slide="3")
+        .slider-control__dot
+          img(src='img/partnerLogo_1.png' srcset='img/partnerLogo_1@2x.png 2x')
+      .slider-control(data-slide="4")
+        .slider-control__dot
+          img(src='img/partnerLogo_1.png' srcset='img/partnerLogo_1@2x.png 2x')
+      .slider-control(data-slide="5")
+        .slider-control__dot
+          img(src='img/partnerLogo_1.png' srcset='img/partnerLogo_1@2x.png 2x')
+              
+                
 
   // SECTION
   .section.section--dark(data-section=8)
     .container
       .p-title Частью третьего сектора может быть каждый
-      
       .cta-form
         .cta-form__head Только так можно создать общество, в котором будет приятно жить
-        
         form(action="#").cta-form__capture
           input(type="email" placeholder="Ваш email")
           button(type="submit") Присоединиться
           
-  // POPUPS
-  .popup-dialog.mfp-hide#modalRegister
-    .popup-content
-      form.popup-form(action="#")
-        .ui-group
-          input(type="text" name="name" placeholder="Имя")
-        .ui-group
-          input(type="email" name="email" placeholder="pave@mail.ru")
-        .ui-group
-          input(type="text" name="" placeholder="Специализация")
-        .ui-group
-          .ui-checkbox
-            input(type="checkobx" name="agree" id="agree")
-            label(for="agree")
-              span Принимаю соглашение о персональных данных
-              
-        .popup-form__cta
-          button(type="submit").btn.btn-primary.btn-white
-            span Отправить
-          
-  // login
-  .popup-dialog.mfp-hide#modalLogin
-    .popup-content
-      form.popup-form(action="#")
-        .ui-group
-          input(type="text" name="name" placeholder="Имя")
-        .ui-group
-          input(type="email" name="email" placeholder="pave@mail.ru")
-        .ui-group
-          .ui-checkbox
-            input(type="checkobx" name="remember" id="remember")
-            label(for="remember")
-              span Запомнить
-              
-        .popup-form__cta
-          button(type="submit").btn.btn-primary.btn-white
-            span Войти
+  
+  include components/_modal
                 

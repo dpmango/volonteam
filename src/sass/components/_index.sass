@@ -33,11 +33,15 @@
     text-align: center
     margin: auto
     svg
+      overflow: visible
+      transform-origin: center center
       #logo-dash
         transform-origin: center center
       #logo-letter
-        transform-origin: right center
+        transform-origin: center center
 
+.no-pointers
+  pointer-events: none
 
 .p-title
   font-size: 55px
@@ -63,35 +67,85 @@
   display: flex
   justify-content: flex-end
   align-items: stretch
-  margin-bottom: 5vh
+  margin-bottom: 70px
 
 .cta-choice
+  position: relative
   display: inline-block
-  cursor: pointer
   margin-right: 25px
   &__trigger
+    position: relative
+    z-index: 2
     display: flex
     align-items: center
     padding: 8px 12px 8px 40px
     background: $colorOrange
     border-radius: 50px
     box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10)
-    +tr
     span
       font-size: 16px
       letter-spacing: 0.71px
       line-height: 1.18
     &-icon
-      display: flex
-      align-items: center
-      justify-content: center
+      position: relative
+      display: inline-block
       background: white
       size: 55px
       margin-left: 20px
       border-radius: 50%
       box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10)
-      font-size: 28px
       color: $colorOrange
+      cursor: pointer
+      .ico
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%,-50%)
+        +tr
+        &-expand
+          font-size: 28px
+        &-close
+          font-size: 0
+
+      +tr
+      &:hover
+        opacity: .7
+      &.is-opened
+        .ico
+          &-expand
+            font-size: 0
+          &-close
+            font-size: 18px
+
+  &__options
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 1
+    background: #FFFFFF
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,0.15)
+    border-radius: 41px
+    padding: 22px 40px 90px 40px
+    opacity: 0
+    pointer-events: none
+    transform: translate3d(0,20px,0)
+    +tr
+    span
+      display: block
+      padding: 8px 0
+      cursor: pointer
+      +tr
+      &:hover
+        color: $colorOrange
+      &.is-chosen
+        color: $colorOrange
+
+    &.is-opened
+      opacity: 1
+      pointer-events: all
+      transform: translate3d(0,0px,0)
+
 
 .cta-help
   background: $colorPrimary
@@ -108,6 +162,8 @@
     line-height: 1.18
     padding: 20px 50px
     border-radius: 50%
+  &:hover
+    opacity: .7
 
 
 /* request slider
@@ -259,14 +315,17 @@
 
 /* quote
 .quote
-  margin: auto
+  height: 100vh
+  min-height: 500px
+  display: flex !important
+  flex-direction: column
+  padding-bottom: 250px
   &__text
     position: relative
     max-width: 1015px
     padding-left: 200px
     padding-right: 200px
-    margin-left: auto
-    margin-right: auto
+    margin: auto
     font-size: 40px
     line-height: 1.25
     color: $colorOrange
@@ -346,3 +405,123 @@
       &:hover
         background-color: $colorOrange
         color: white
+
+
+/* presentation btn
+.presentation-btn
+  position: absolute
+  z-index: 5
+  top: 50%
+  transform: translateY(-50%)
+  right: 0
+  height: 67px
+  display: flex
+  align-items: center
+  background: rgba(255,255,255,0.6)
+  border-radius: 50px
+  pointer-events: all
+  +tr
+  span
+    font-size: 15px
+    letter-spacing: 0.66px
+    padding: 15px 10px 15px 25px
+  &__icon
+    display: flex
+    align-items: center
+    justify-content: center
+    size: 55px
+    background: $colorOrange
+    color: white
+    font-size: 23px
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.15)
+    border-radius: 50%
+    margin-right: 8px
+    +tr
+    .ico
+      +tr
+
+  &:hover
+    // background-color: white
+    .presentation-btn__icon
+      opacity: .7
+    // .ico
+    //   transform: translateY(5px)
+
+
+/* slider
+.slider
+  position: absolute 0
+  z-index: 1
+  &-slide
+    position: relative
+    height: 100vh
+    min-height: 500px
+
+.slider-controls
+  position: absolute
+  z-index: 5
+  bottom: 120px
+  left: 50%
+  transform: translateX(-50%)
+  display: flex
+  align-items: center
+  width: 100%
+  max-width: 900px
+  pointer-events: none
+  &--orange
+    .slider-control
+      &__dot
+        background-color: $colorOrange
+      &::after
+        background-color: $colorOrange
+
+
+.slider-control
+  position: relative
+  flex: 0 0 20%
+  display: flex
+  flex-direction: column
+  margin: 0 10px
+  height: 180px
+  &__dot
+    position: relative
+    z-index: 2
+    display: flex
+    justify-content: center
+    align-items: center
+    size: 23px
+    margin-top: auto
+    margin-bottom: auto
+    background: white
+    border-radius: 50%
+    overflow: hidden
+    cursor: pointer
+    pointer-events: all
+    +tr
+  &::after
+    position: absolute
+    z-index: 1
+    left: 35px
+    right: 0px
+    top: 50%
+    transform: translateY(-50%)
+    display: inline-block
+    content: ' '
+    background: white
+    height: 2px
+
+  &:last-child
+    &::after
+      display: none
+  img
+    max-width: 100%
+    opacity: 0
+    transform: scale(0)
+    +tr
+  &.is-active
+    .slider-control__dot
+      size: 180px
+      transform: translateX(-90px)
+    img
+      opacity: 1
+      transform: scale(1)

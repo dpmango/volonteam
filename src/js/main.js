@@ -143,27 +143,31 @@ $(document).ready(function(){
   function listenScroll(){
     var scrollTop = 0;
 
-    _window.on('wheel', throttle(function(e){
+    _window.on('wheel', function(e){
       // GET SCROLL PARAMS
       var delta = e.originalEvent.deltaY
+      var speedController = 2.4
       if ( delta > 0 ){
-        scrollTop = scrollTop + (delta / 2)
+        scrollTop = scrollTop + (delta / speedController)
       } else if ( delta < 0 ){
-        scrollTop = scrollTop - Math.abs(delta / 2)
+        scrollTop = scrollTop - Math.abs(delta / speedController)
       }
 
       // prevent scrolling past top
-      if ( scrollTop < 0 ){
+      if ( scrollTop < 0){
         return false
       }
 
-      scrollBy(scrollTop)
+      // don't scroll past bottom and reset val
+      if ( scrollTop > (sections.length - 1) * wHeight ){
+        scrollTop = (sections.length - 1) * wHeight
+      }
+
+      scrollBy(Math.round(scrollTop))
 
       e.preventDefault();
 
-    }, 1, {
-      'leading': true
-    }))
+    });
 
     _window.on('resize', throttle(function(e){
       wHeight = _window.height();
@@ -181,22 +185,40 @@ $(document).ready(function(){
     })
 
     if ( nextSectionNum === 1){
-      var logoDashes = $('[js-scroll-logo] svg #logo-dash')
+      // var logoDashes = $('[js-scroll-logo] svg #logo-dash')
+      // var logoLetters = $('[js-scroll-logo] svg #logo-letter')
+      // var sizePowerScale = 1 - (scrollTop / wHeight / 3)
+      // var sizePowerX =  (scrollTop / wHeight) * 70
+      //
+      // logoDashes.css({
+      //   'transform': 'scale('+sizePowerScale+')'
+      // })
+      //
+      // logoLetters.css({
+      //   'transform': 'translateX('+sizePowerX+'px)'
+      // })
+      var logo = $('[js-scroll-logo] svg')
       var logoLetters = $('[js-scroll-logo] svg #logo-letter')
-      var sizePowerScale = 1 - (scrollTop / wHeight / 3)
+      var sizePowerScale = 1 - (scrollTop / wHeight / 5)
+      var sizePowerScaleInvert = 1 + (scrollTop / wHeight / 2)
       var sizePowerX =  (scrollTop / wHeight) * 70
 
-      logoDashes.css({
+      // issue with transform origin
+      // get boundings ?? bBox()
+
+      logo.css({
         'transform': 'scale('+sizePowerScale+')'
       })
-
       logoLetters.css({
-        'transform': 'translateX('+sizePowerX+'px)'
+        'transform': 'scale('+sizePowerScaleInvert+')'
       })
 
     }
 
-    if ( nextSectionNum > 1){
+    // HEADER ANIMATION - scroll 80% of first screen
+    var whenHeaderMoves = (scrollTop / wHeight) + 1 > 1.8
+
+    if ( whenHeaderMoves ){
       $('.header').addClass('is-fixed');
     } else {
       $('.header').removeClass('is-fixed')
@@ -205,6 +227,23 @@ $(document).ready(function(){
 
   listenScroll();
 
+
+  //////////
+  // TOGGLERS, ETC
+  //////////
+  $('[js-cta-choice-trigger]').on('click', function(){
+    $(this).toggleClass('is-opened');
+    $('[js-cta-choice-options]').toggleClass('is-opened');
+  });
+
+  $('[js-cta-choice-options] span').on('click', function(){
+    $('.cta-choice__trigger span').text('Я разбираюсь '+ $(this).text() )
+    $(this).addClass('is-chosen').siblings().removeClass('is-chosen');
+    $('[js-cta-choice-trigger]').removeClass('is-opened');
+    $('[js-cta-choice-options]').removeClass('is-opened');
+  })
+
+
   //////////
   // SLIDERS
   //////////
@@ -212,7 +251,7 @@ $(document).ready(function(){
   var slickNextArrow = '<div class="slick-prev"><svg class="ico ico-slick-prev"><use xlink:href="img/sprite.svg#ico-slick-prev"></use></svg></div>';
   var slickPrevArrow = '<div class="slick-next"><svg class="ico ico-slick-next"><use xlink:href="img/sprite.svg#ico-slick-next"></use></svg></div>'
 
-  $('[js-slider]').slick({
+  $('[js-slider-requests]').slick({
     autoplay: false,
     dots: false,
     arrows: true,
@@ -226,6 +265,30 @@ $(document).ready(function(){
     variableWidth: false
   });
 
+  $('[js-full-slider]').slick({
+    autoplay: false,
+    dots: false,
+    arrows: false,
+    prevArrow: slickNextArrow,
+    nextArrow: slickPrevArrow,
+    infinite: false,
+    speed: 300,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerMode: false,
+    variableWidth: false
+  });
+
+  // slider full controls
+  $('.slider-control__dot').on('click', function(){
+    var parent = $(this).parent();
+    var slideNum = parent.data('slide');
+
+    parent.addClass('is-active').siblings().removeClass('is-active');
+
+    console.log(parent.parent().parent().find('[js-full-slider]'))
+    parent.parent().parent().find('[js-full-slider]').slick('slickGoTo', slideNum - 1)
+  })
   //////////
   // MODALS
   //////////

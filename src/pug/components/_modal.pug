@@ -1,0 +1,37 @@
+// POPUPS
+.popup-dialog.mfp-hide#modalRegister
+  .popup-content
+    form.popup-form(action="#" js-validate-register)
+      .ui-group
+        input(type="text" name="name" placeholder="Имя")
+      .ui-group
+        input(type="email" name="email" placeholder="pave@mail.ru")
+      .ui-group
+        input(type="text" name="" placeholder="Специализация")
+      .ui-group
+        .ui-checkbox
+          input(type="checkbox" name="agree" id="agree")
+          label(for="agree")
+            span Принимаю соглашение о персональных данных
+            
+      .popup-form__cta
+        button(type="submit").btn.btn-primary.btn-white
+          span Отправить
+        
+// login
+.popup-dialog.mfp-hide#modalLogin
+  .popup-content
+    form.popup-form(action="#" js-validate-login)
+      .ui-group
+        input(type="email" name="email" placeholder="E-mail")
+      .ui-group
+        input(type="password" name="name" placeholder="пароль")
+      .ui-group
+        .ui-checkbox
+          input(type="checkbox" name="remember" id="remember")
+          label(for="remember")
+            span Запомнить меня
+            
+      .popup-form__cta
+        button(type="submit").btn.btn-primary.btn-white
+          span Войти

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="847px" height="26px" viewBox="0 0 847 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="884px" height="26px" viewBox="0 0 884 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="1366(1)-copy-2" transform="translate(-241.000000, -382.000000)" fill="#FFFFFF">
             <g id="Page-1-Copy-3" transform="translate(241.000000, 382.000000)">
@@ -11,6 +15,7 @@
                     <polygon id="logo-dash" points="528.583103 15.201 606.07529 15.201 606.07529 10.2522857 528.583103 10.2522857"></polygon>
                     <polygon id="logo-dash" points="646.663371 15.201 724.155557 15.201 724.155557 10.2522857 646.663371 10.2522857"></polygon>
                     <polygon id="logo-dash" points="768.920443 15.201 846.412629 15.201 846.412629 10.2522857 768.920443 10.2522857"></polygon>
+                    <polygon id="logo-letter" points="877.648674 1 870.522221 13.2388673 863.419297 1 857 1 857 24 862.947424 24 862.947424 10.1750561 869.066082 20.5280167 871.957446 20.5280167 878.052576 10.1750561 878.052576 24 884 24 884 1"></polygon>
                     <polygon id="logo-letter" points="757.955626 24.8936143 751.736744 24.8936143 751.736744 10.0500429 741.31661 24.8936143 735.120889 24.8936143 735.120889 1.42032857 741.31661 1.42032857 741.31661 16.2407571 751.736744 1.42032857 757.955626 1.42032857"></polygon>
                     <polygon id="logo-letter" points="635.697654 6.79062857 629.595866 6.79062857 629.595866 24.8934857 623.189118 24.8934857 623.189118 6.79062857 617.041007 6.79062857 617.041007 1.4202 635.697654 1.4202"></polygon>
                     <polygon id="logo-letter" points="517.617386 24.8936143 511.304571 24.8936143 511.304571 15.1851857 501.588291 15.1851857 501.588291 24.8936143 495.275476 24.8936143 495.275476 1.42032857 501.588291 1.42032857 501.588291 10.2377571 511.304571 10.2377571 511.304571 1.42032857 517.617386 1.42032857"></polygon>

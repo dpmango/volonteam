@@ -11,6 +11,7 @@ button
 .btn
   display: inline-block
   position: relative
+  z-index: 1
   text-align: center
   transition: all $transitionSpeed ease-in-out
   &:focus, &:active
@@ -28,6 +29,7 @@ button
     letter-spacing: 0.71px
     box-shadow: 0 1px 1px 0 rgba(0,0,0,0.10)
     border-radius: 50px
+    background-color: $colorOrange
     transform: translate3d(0,0,0)
     &::after
       display: inline-block
@@ -49,7 +51,7 @@ button
       z-index: 2
 
     &:hover
-      color: $colorPrimary
+      // color: $colorPrimary
       &::after
         opacity: 0
         width: 10%

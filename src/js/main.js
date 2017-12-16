@@ -184,6 +184,8 @@ $(document).ready(function(){
       'transform': 'translate3d(0,-'+scrollTop+'px,0)'
     })
 
+    $(nextSection).addClass('is-current').siblings().removeClass('is-current');
+
     if ( nextSectionNum === 1){
       // var logoDashes = $('[js-scroll-logo] svg #logo-dash')
       // var logoLetters = $('[js-scroll-logo] svg #logo-letter')

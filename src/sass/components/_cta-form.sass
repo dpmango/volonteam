@@ -57,11 +57,28 @@
       &:hover
         background-color: $colorOrange
         color: white
+  &__mobile
+    display: none
+    margin-top: auto
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    padding-bottom: 30px
+    padding-top: 50px
+    .footer__copy
+      margin-top: 15px
+      a
+        font-size: 14px
+        color: white
+        +tr
+        &:hover
+          opacity: .7
+
 
 +r($desktop)
   .cta-form
     &__head
-      font-size: 25px
+      font-size: 26px
 
 +r($tablet)
   .cta-form
@@ -74,6 +91,9 @@
 
       button
         font-size: 12px
+    &__mobile
+      display: flex
+
 
 
 +r($mobile)

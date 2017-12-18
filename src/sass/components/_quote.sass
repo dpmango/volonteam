@@ -30,6 +30,10 @@
     &::after
       content: '»'
       right: -20px
+  &__mobile-logo
+    display: none
+    img
+      max-width: 100%
 
 +rh(500)
   .quote
@@ -54,8 +58,16 @@
       padding-left: 100px
       padding-right: 100px
       text-align: center
+      margin-top: 0
       &::before, &::after
         font-size: 300px
+        opacity: .3
+
+    &__mobile-logo
+      display: inline-block
+      text-align: center
+      margin-top: auto
+      margin-bottom: 25px
 
 +r($mobile)
   .quote
@@ -65,3 +77,4 @@
       padding-right: 80px
       &::before, &::after
         font-size: 240px
+        opacity: .2

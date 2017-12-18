@@ -31,6 +31,8 @@
     line-height: 1.2
 
 +r($desktop)
+  .benefits-wrap
+    padding-bottom: 20px
   .benefit-card
     flex-basis: 50%
     width: 50%
@@ -43,6 +45,7 @@
 
 +r($mobile)
   .benefits-wrap
+    padding-bottom: 0
     flex-direction: column
     flex-wrap: nowrap
 
@@ -55,6 +58,8 @@
     &__name
       font-size: 17px
       letter-spacing: .75px
+    &__icon
+      min-height: 1px
     &__description
       margin-top: 10px
       font-size: 13px

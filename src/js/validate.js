@@ -102,4 +102,27 @@ $(document).ready(function(){
     }
   });
 
+  /////////////////////
+  // LOGIN FORM
+  ////////////////////
+  $("[js-validate-join]").validate({
+    errorPlacement: validateErrorPlacement,
+    highlight: validateHighlight,
+    unhighlight: validateUnhighlight,
+    submitHandler: validateSubmitHandler,
+    rules: {
+      email: {
+        required: true,
+        email: true
+      }
+    },
+    messages: {
+      email: {
+          required: "Заполните это поле",
+          email: "Email содержит неправильный формат"
+      }
+    }
+  });
+
+
 });

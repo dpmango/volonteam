@@ -179,9 +179,22 @@ $(document).ready(function(){
 
         // don't scroll past bottom and reset val
         if ( scrollTop > (sections.length - 1) * wHeight ){
-          scrollTop = (sections.length - 1) * wHeight
-
+          // scrollTop = (sections.length - 1) * wHeight
+          $('.footer').css({
+            'transform': 'translate3d(0,-'+Math.round(scrollTop)+'px,0)',
+            'z-index': 9
+          })
           // scroll footer ?
+        } else{
+          $('.footer').css({
+            'z-index': 1
+          })
+        }
+
+        if ( scrollTop > (sections.length - 1) * wHeight + $('.footer').outerHeight() ){
+          scrollTop = (sections.length - 1) * wHeight + $('.footer').outerHeight();
+
+          return false
         }
 
         wHeightPrev = _window.height(); // update prevheight for reset calcultations
@@ -294,6 +307,7 @@ $(document).ready(function(){
         'transform': 'translate3d(0,-'+0+'px,0)'
       })
     });
+    $('.footer').attr('style', "")
 
     // reset header
     var header = $('.header')
@@ -365,7 +379,7 @@ $(document).ready(function(){
     arrows: true,
     prevArrow: slickNextArrow,
     nextArrow: slickPrevArrow,
-    infinite: false,
+    infinite: true,
     speed: 300,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -442,10 +456,6 @@ $(document).ready(function(){
   ////////////
   // UI
   ////////////
-
-  // Tooltip - bootstrap 3 UI
-  $('[data-toggle="tooltip"]').tooltip()
-
 
   // Masked input
   $(".js-dateMask").mask("99.99.99",{placeholder:"ДД.ММ.ГГ"});

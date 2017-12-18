@@ -298,6 +298,34 @@ $(document).ready(function(){
     $('[js-cta-choice-options]').removeClass('is-opened');
   })
 
+  // pro bono
+  $('[js-more-bono]').on('click', function(){
+    $('[js-more-bono]').fadeOut();
+    $('[js-more-bono]').addClass('is-active');
+    if ( _window.width() > 992 ){
+      $('.pro-bono-card--hidden').fadeIn();
+    } else if ( _window.width() > 568 ){
+      $('.pro-bono-card:nth-child(n+3)').fadeIn();
+    } else if ( _window.width() > 1 ){
+      $('.pro-bono-card:nth-child(n+2)').fadeIn();
+    }
+  })
+
+  _window.on('resize', debounce(function(){
+    if ( $('[js-more-bono]').is('.is-active') ){
+      $('[js-more-bono]').fadeIn();
+      $('[js-more-bono]').removeClass('is-active')
+      if ( _window.width() > 992 ){
+        $('.pro-bono-card--hidden').fadeOut();
+      } else if ( _window.width() > 568 ){
+        $('.pro-bono-card:nth-child(n+3)').fadeOut();
+      } else if ( _window.width() > 1 ){
+        $('.pro-bono-card:nth-child(n+2)').fadeOut();
+      }
+    }
+  }, 300))
+
+
 
   //////////
   // SLIDERS
@@ -343,7 +371,7 @@ $(document).ready(function(){
     infinite: false,
     speed: 300,
     slidesToShow: 1,
-    slidesToScroll: 1,
+    // slidesToScroll: 1,
     centerMode: false,
     variableWidth: false
   });

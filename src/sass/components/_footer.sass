@@ -1,9 +1,9 @@
 // FOOTER
 .footer
-  position: fixed
-  bottom: 0
-  left: 0
-  right: 0
+  // position: fixed
+  // bottom: 0
+  // left: 0
+  // right: 0
   padding: 45px 0
   background: white
   &__wrapper
@@ -55,3 +55,29 @@
 
   &__copy
     margin-top: 25px
+
+
++r($desktop)
+  .footer
+    &__col
+      font-size: 14px
+
++r($tablet)
+  .footer
+    &__wrapper
+      flex-direction: column
+      align-items: center
+    &__col
+      text-align: center
+      &:nth-child(2)
+        margin: 25px 0
+        text-align: center
+      &:nth-child(3)
+        text-align: center
+
+
+
++r($mobile)
+  .footer
+    &__col
+      font-size: 10px

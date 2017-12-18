@@ -61,6 +61,8 @@
     cursor: pointer
     animation: scrolldown 2.5s easeOutQuad infinite
     +tr
+    &--dark
+
     &:hover
       animation-name: none
       transform: translateX(-50%) scale(1.1)
@@ -448,6 +450,8 @@
   flex: 0 1 33%
   padding: 15px 2%
   width: 33%
+  &--hidden
+    display: none
   &__name
     padding-top: 10px
     font-size: 25px
@@ -497,7 +501,7 @@
     &__description
       font-size: 13px
 
-
+/* more btn
 .more-btn
   display: flex
   max-width: 190px
@@ -570,6 +574,41 @@
       content: '»'
       right: -20px
 
++rh(500)
+  .quote
+    height: auto
+    min-height: 100vh
+
++r($desktop)
+  .quote
+    height: auto
+    min-height: 100vh
+    &__text
+      padding-left: 140px
+      padding-right: 140px
+      font-size: 35px
+      &::before, &::after
+        font-size: 380px
+
++r($tablet)
+  .quote
+    &__text
+      font-size: 30px
+      padding-left: 100px
+      padding-right: 100px
+      text-align: center
+      &::before, &::after
+        font-size: 300px
+
++r($mobile)
+  .quote
+    &__text
+      font-size: 16px
+      padding-left: 80px
+      padding-right: 80px
+      &::before, &::after
+        font-size: 240px
+
 
 /* CTA
 .cta-form
@@ -631,6 +670,43 @@
         background-color: $colorOrange
         color: white
 
++r($desktop)
+  .cta-form
+    &__head
+      font-size: 25px
+
++r($tablet)
+  .cta-form
+    &__head
+      font-size: 22px
+      text-align: center
+    &__capture
+      input
+        font-size: 15px
+
+      button
+        font-size: 12px
+
+
++r($mobile)
+  .cta-form
+    &__head
+      font-size: 16px
+      max-width: 230px
+      margin-left: auto
+      margin-right: auto
+    &__capture
+      height: 50px
+      input
+        font-size: 13px
+
+      button
+        width: 120px
+        font-size: 10px
+        letter-spacing: .44px
+
+
+
 
 /* presentation btn
 .presentation-btn
@@ -682,6 +758,19 @@
     height: 100vh
     min-height: 500px
 
++r(500)
+  .slider
+    &-slide
+      height: auto
+      min-height: 100vh
+
++r($desktop)
+  .slider
+    &-slide
+      height: auto
+      min-height: 100vh
+      overflow: hidden
+
 .slider-controls
   position: absolute
   z-index: 5
@@ -692,6 +781,7 @@
   align-items: center
   width: 100%
   max-width: 900px
+  margin-left: 90px
   pointer-events: none
   &--orange
     .slider-control
@@ -703,10 +793,10 @@
 
 .slider-control
   position: relative
-  flex: 0 0 20%
+  flex: 0 1 20%
   display: flex
   flex-direction: column
-  margin: 0 10px
+  padding: 0 10px
   height: 180px
   &__dot
     position: relative
@@ -715,6 +805,8 @@
     justify-content: center
     align-items: center
     size: 23px
+    padding-left: 10px
+    padding-right: 10px
     margin-top: auto
     margin-bottom: auto
     background: white
@@ -726,8 +818,8 @@
   &::after
     position: absolute
     z-index: 1
-    left: 35px
-    right: 0px
+    left: 45px
+    right: 5px
     top: 50%
     transform: translateY(-50%)
     display: inline-block
@@ -750,3 +842,41 @@
     img
       opacity: 1
       transform: scale(1)
+
++r($desktop)
+  .slider-controls
+    max-width: 700px
+    margin-left: 70px
+
+  .slider-control
+    height: 140px
+    &.is-active
+      .slider-control__dot
+        size: 140px
+        transform: translateX(-70px)
+
++r($tablet)
+  .slider-controls
+    max-width: 500px
+    bottom: 100px
+    margin-left: 50px
+
+  .slider-control
+    height: 100px
+    &.is-active
+      .slider-control__dot
+        size: 100px
+        transform: translateX(-50px)
+
++r($mobile)
+  .slider-controls
+    max-width: 500px
+    margin-left: 0
+    bottom: 100px
+
+  .slider-control
+    height: 80px
+    &.is-active
+      .slider-control__dot
+        size: 24px
+        transform: translateX(0px)

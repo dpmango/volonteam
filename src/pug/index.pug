@@ -89,6 +89,7 @@ block content
               a(href="#").btn.btn-primary
                 span помочь
         
+        // scrolldown
         .section__scrolldown(js-scrolldown)
           i.icon.icon-scrolldown
         
@@ -177,8 +178,12 @@ block content
         .pro-bono-card
           .pro-bono-card__name Какой смысл ввязываться, если у меня почти нет времени?
           .pro-bono-card__description Мы стараемся сделать так, чтобы каждый специалист тратил ровно столько времени, сколько ему комфортно. Наши чатботы сами по себе экономят время, кроме того вы можете установить максимальное количество часов в месяц и удобные дни недели и часы для консультаций.
+        //card
+        .pro-bono-card.pro-bono-card--hidden
+          .pro-bono-card__name Какой смысл ввязываться, если у меня почти нет времени?
+          .pro-bono-card__description Мы стараемся сделать так, чтобы каждый специалист тратил ровно столько времени, сколько ему комфортно. Наши чатботы сами по себе экономят время, кроме того вы можете установить максимальное количество часов в месяц и удобные дни недели и часы для консультаций.
       
-      .more-btn
+      .more-btn(js-more-bono)
         .more-btn__caption Еще
         .more-btn__icon
           +icon('ico-slick-next')
@@ -215,9 +220,11 @@ block content
         .slider-control__dot
           img(src='img/partnerLogo_1.png' srcset='img/partnerLogo_1@2x.png 2x')
               
-                
+    // scrolldown
+    .section__scrolldown.section__scrolldown--dark(js-scrolldown)
+      i.icon.icon-scrolldown-dark        
 
-  // SECTION
+  // CTA :: START
   .section.section--dark(data-section=8)
     .container
       .p-title Частью третьего сектора может быть каждый

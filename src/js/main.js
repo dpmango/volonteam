@@ -124,15 +124,25 @@ $(document).ready(function(){
 
   // SVG TRANSFORM CALC
   function calcLogoTransform(){
-    var logoLetters = $('[js-scroll-logo] svg').find('#logo-letter');
+    var logoLetters = $('[js-scroll-logo] svg').find('.logo-letter');
 
     logoLetters.each(function(i, letter){
-      console.log(letter)
+      addTransformOrigin(letter)
     })
-  
+
+  }
+
+  function addTransformOrigin(my_element){
+    var bb = $(my_element).get(0).getBBox();
+    var cx = bb.x + bb.width / 2;
+    var cy = bb.y + bb.height / 2;
+    
+    var bodyStyle = "<style>"+ " ." + $(my_element).attr('class').split(' ')[1] + " { transform-origin: "+cx + 'px ' + cy + 'px'+"; }</style>"
+    $( bodyStyle ).appendTo( "body" )
   }
 
   calcLogoTransform();
+  _window.on('resize', debounce(calcLogoTransform, 300));
 
 
   //////////
@@ -208,8 +218,8 @@ $(document).ready(function(){
     $(nextSection).addClass('is-current').siblings().removeClass('is-current');
 
     if ( nextSectionNum === 1){
-      // var logoDashes = $('[js-scroll-logo] svg #logo-dash')
-      // var logoLetters = $('[js-scroll-logo] svg #logo-letter')
+      // var logoDashes = $('[js-scroll-logo] svg .logo-dash')
+      // var logoLetters = $('[js-scroll-logo] svg .logo-letter')
       // var sizePowerScale = 1 - (scrollTop / wHeight / 3)
       // var sizePowerX =  (scrollTop / wHeight) * 70
       //
@@ -221,7 +231,7 @@ $(document).ready(function(){
       //   'transform': 'translateX('+sizePowerX+'px)'
       // })
       var logo = $('[js-scroll-logo] svg')
-      var logoLetters = $('[js-scroll-logo] svg #logo-letter')
+      var logoLetters = $('[js-scroll-logo] svg .logo-letter')
       var sizePowerScale = 1 - (scrollTop / wHeight / 5)
       var sizePowerScaleInvert = 1 + (scrollTop / wHeight / 2)
       var sizePowerX =  (scrollTop / wHeight) * 70

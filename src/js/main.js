@@ -111,41 +111,53 @@ $(document).ready(function(){
     var scrollTop = 0;
 
     _window.on('wheel', function(e){
-      // GET SCROLL PARAMS
-      var delta = e.originalEvent.deltaY
-      var speedController = 2.4 // make it smooth
-      if ( delta > 0 ){
-        scrollTop = scrollTop + (delta / speedController)
-      } else if ( delta < 0 ){
-        scrollTop = scrollTop - Math.abs(delta / speedController)
+
+      if ( _mobileDevice || _window.width() < 992 || _window.height() < 500 ){
+
+      } else {
+
+        // GET SCROLL PARAMS
+        var delta = e.originalEvent.deltaY
+        var speedController = 2.4 // make it smooth
+        if ( delta > 0 ){
+          scrollTop = scrollTop + (delta / speedController)
+        } else if ( delta < 0 ){
+          scrollTop = scrollTop - Math.abs(delta / speedController)
+        }
+
+        // prevent scrolling past top
+        if ( scrollTop < 0){
+          scrollTop = 0
+          return false
+        }
+
+        // don't scroll past bottom and reset val
+        if ( scrollTop > (sections.length - 1) * wHeight ){
+          scrollTop = (sections.length - 1) * wHeight
+
+          // scroll footer ?
+        }
+
+        wHeightPrev = _window.height(); // update prevheight for reset calcultations
+        scrollBy(Math.round(scrollTop))
+
+        e.preventDefault();
+
       }
-
-      // prevent scrolling past top
-      if ( scrollTop < 0){
-        scrollTop = 0
-        return false
-      }
-
-      // don't scroll past bottom and reset val
-      if ( scrollTop > (sections.length - 1) * wHeight ){
-        scrollTop = (sections.length - 1) * wHeight
-
-        // scroll footer ?
-      }
-
-      wHeightPrev = _window.height(); // update prevheight for reset calcultations
-      scrollBy(Math.round(scrollTop))
-
-      e.preventDefault();
 
     });
 
     _window.on('resize', debounce(function(e){
-      wHeight = _window.height();
-      resizeScroll(scrollTop);
-      setTimeout(function(){
-        wHeightPrev = _window.height(); // update prevheight for reset calcultations
-      }, 50)
+      if ( _mobileDevice || _window.width() < 992 || _window.height() < 500 ){
+        resetSections();
+      }else{
+        wHeight = _window.height();
+        resizeScroll(scrollTop);
+        setTimeout(function(){
+          wHeightPrev = _window.height(); // update prevheight for reset calcultations
+        }, 50)
+      }
+
     }, 100));
   }
 
@@ -229,6 +241,21 @@ $(document).ready(function(){
         })
       }
     });
+  }
+
+  function resetSections(){
+    sections.each(function(i, section){
+      $(section).css({
+        'transform': 'translate3d(0,-'+0+'px,0)'
+      })
+    });
+
+    // reset header
+    header.addClass('is-fixed');
+    header.css({
+      'transform': 'translate3d(0,-'+0+'px,0)'
+    })
+
   }
 
   listenScroll();

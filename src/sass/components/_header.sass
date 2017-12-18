@@ -47,3 +47,28 @@
       &.is-active
         a
           color: $colorPrimary
+  &__hamburger
+    display: none
+    margin-left: auto
+
+
++r($wide)
+  .header
+    &__menu
+      margin-left: 5%
+    &__menu, &__login
+      li
+        font-size: 15px
+
++r($desktop)
+  .header
+    transform: translate3d(0,calc(-100vh + 50px),0) !important
+    &.is-fixed
+      transform: translate3d(0,calc(-100vh + 50px),0) !important
+
+    &__wrapper
+      padding: 15px 0
+    &__menu, &__login
+      display: none
+    &__hamburger
+      display: block

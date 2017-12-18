@@ -72,3 +72,56 @@
       display: none
     &__hamburger
       display: block
+
++r($mobile)
+  .header
+    &__logo
+      transform-origin: left center
+      transform: scale(.65)
+
+
+/* mobile navi
+.mobile-navi
+  display: none
+  position: fixed
+  z-index: 8
+  top: 50px
+  left: 25px
+  right: 25px
+  opacity: 0
+  transform: translate3d(0,-100%,0)
+  // pointer-events: none
+  +tr
+  &.is-active
+    opacity: 1
+    transform: translate3d(0,0,0)
+    .mobile-navi__menu
+      pointer-events: all
+  &__menu
+    pointer-events: all
+    list-style: none
+    margin: 0
+    padding: 25px
+    max-width: 270px
+    margin-left: auto
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,0.10)
+    border-radius: 0 0 20px 20px
+    background: $colorPrimary
+    li
+      display: block
+      font-size: 13px
+      letter-spacing: 0.96px
+      a
+        display: inline-block
+        padding: 12px 0
+        +tr
+        &:hover
+          color: white
+
++rmin($desktop)
+  .mobile-navi
+    display: none !important
+
++r($desktop)
+  .mobile-navi
+    display: block

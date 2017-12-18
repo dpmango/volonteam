@@ -83,10 +83,25 @@ $(document).ready(function(){
 
 
   // HAMBURGER TOGGLER
-  $('[js-hamburger]').on('click', function(){
-    $(this).toggleClass('active');
-    $('.mobile-navi').toggleClass('active');
+  $('[js-hamburger]').on('click', function(e){
+    $(this).toggleClass('is-active');
+    $('.mobile-navi').toggleClass('is-active');
+
+    e.preventDefault();
+    e.stopPropagation();
   });
+  _document.on('click', function(e){
+    if(!$(e.target).closest('.mobile-navi__menu').length) {
+      if ( $('[js-hamburger]').is('.is-active') ) {
+        closeMobileMenu();
+      }
+    }
+  });
+
+  function closeMobileMenu(){
+    $('[js-hamburger]').toggleClass('is-active');
+    $('.mobile-navi').toggleClass('is-active');
+  }
 
   // SET ACTIVE CLASS IN HEADER
   // * could be removed in production and server side rendering

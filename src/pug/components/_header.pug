@@ -4,7 +4,7 @@ header.header
     .header__wrapper
       .header__logo
         a.logo(href="#")
-          +icon('ico-logo2')
+          include ../../icons/logo2.svg
       ul.header__menu(js-section-nav)
         li
           a(href="#sectionNKO") Для НКО
@@ -21,8 +21,26 @@ header.header
           a(js-popup href="#modalLogin") Войти
           
       .header__hamburger
-        .hamburger
+        .hamburger.hamburger--spin(js-hamburger)
           .hamburger-box
             .hamburger-inner
         
 // HEADER :: END
+
+
+// MOBILE NAVI
+.mobile-navi
+  ul.mobile-navi__menu
+    li
+      a(js-popup href="#modalRegister") Зарегистрироваться
+    li
+      a(js-popup href="#modalLogin") Войти
+    li
+      a(href="#sectionNKO") Для НКО
+    li
+      a(href="#sectionExperts") Специалистам  
+    li
+      a(href="#sectionBlog") Блог
+    li
+      a(href="#sectionAbout") О нас
+    

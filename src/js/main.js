@@ -120,6 +120,21 @@ $(document).ready(function(){
         scrollTop: $(this).closest('.section').next().offset().top}, 1000);
   })
 
+
+
+  // SVG TRANSFORM CALC
+  function calcLogoTransform(){
+    var logoLetters = $('[js-scroll-logo] svg').find('#logo-letter');
+
+    logoLetters.each(function(i, letter){
+      console.log(letter)
+    })
+  
+  }
+
+  calcLogoTransform();
+
+
   //////////
   // FULLPAGE
   //////////

@@ -1,0 +1,94 @@
+/* CTA
+.cta-form
+  flex: 0 1 auto
+  display: flex
+  flex-direction: column
+  margin-top: auto
+  margin-bottom: 10vh
+  max-width: 570px
+  margin-left: auto
+  margin-right: auto
+  &__head
+    font-size: 30px
+    line-height: 1.2
+
+  &__capture
+    display: flex
+    flex-direction: column
+    position: relative
+    z-index: 1
+    height: 67px
+    margin-top: 15vh
+    border-radius: 50px
+    overflow: hidden
+    input
+      flex: 1 1 auto
+      display: block
+      width: 100%
+      -webkit-appearance: none
+      background: rgba(white, .7)
+      color: $fontColor
+      border: 1px solid $borderColor
+      border-radius: 40px
+      padding: 8px 250px 8px 30px
+      font-size: 18px
+      letter-spacing: .8px
+      box-shadow: 0 1px 6px 0 rgba(0,0,0,0.10)
+      +tr
+      &::placeholder
+        color: rgba($fontColor, .3)
+      &:focus
+        background-color: white
+    button
+      -webkit-apperance: none
+      position: absolute
+      top: 0
+      bottom: 0
+      right: 0
+      width: 220px
+      background: white
+      border-radius: 50px
+      font-size: 16px
+      letter-spacing: 0.71px
+      font-weight: 500
+      box-shadow: 0 1px 6px 0 rgba(0,0,0,0.10)
+      +tr
+
+      &:hover
+        background-color: $colorOrange
+        color: white
+
++r($desktop)
+  .cta-form
+    &__head
+      font-size: 25px
+
++r($tablet)
+  .cta-form
+    &__head
+      font-size: 22px
+      text-align: center
+    &__capture
+      input
+        font-size: 15px
+
+      button
+        font-size: 12px
+
+
++r($mobile)
+  .cta-form
+    &__head
+      font-size: 16px
+      max-width: 230px
+      margin-left: auto
+      margin-right: auto
+    &__capture
+      height: 50px
+      input
+        font-size: 13px
+
+      button
+        width: 120px
+        font-size: 10px
+        letter-spacing: .44px

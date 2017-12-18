@@ -1,0 +1,60 @@
+
+/* benefits
+
+.benefits-wrap
+  display: flex
+  flex-wrap: wrap
+  margin-top: auto
+  margin-bottom: 5vh
+  padding: 50px 0
+
+/* Benefit card
+.benefit-card
+  display: flex
+  flex-direction: column
+  flex: 0 1 25%
+  padding: 15px 2%
+  width: 25%
+  text-align: center
+  &__icon
+    min-height: 55px
+  &__name
+    padding-top: 10px
+    font-size: 25px
+    letter-spacing: 1.11px
+    line-height: 1.1
+  &__description
+    margin-top: 25px
+    font-size: 18px
+    font-weight: 300
+    letter-spacing: 0.8px
+    line-height: 1.2
+
++r($desktop)
+  .benefit-card
+    flex-basis: 50%
+    width: 50%
+    &__name
+      margin-top: 5px
+      font-size: 22px
+    &__description
+      margin-top: 20px
+      font-size: 16px
+
++r($mobile)
+  .benefits-wrap
+    flex-direction: column
+    flex-wrap: nowrap
+
+  .benefit-card
+    flex: 0 0 auto
+    width: 100%
+    max-width: 180px
+    margin-left: auto
+    margin-right: auto
+    &__name
+      font-size: 17px
+      letter-spacing: .75px
+    &__description
+      margin-top: 10px
+      font-size: 13px

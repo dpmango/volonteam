@@ -1,0 +1,67 @@
+
+/* quote
+.quote
+  height: 100vh
+  min-height: 500px
+  display: flex !important
+  flex-direction: column
+  padding-bottom: 250px
+  &__text
+    position: relative
+    max-width: 1015px
+    padding-left: 200px
+    padding-right: 200px
+    margin: auto
+    font-size: 40px
+    line-height: 1.25
+    color: $colorOrange
+    &::before, &::after
+      position: absolute
+      top: 0%
+      display: inline-block
+      font-size: 450px
+      line-height: .2
+      color: $colorOrange
+      opacity: .5
+      // transform: translateY(-50%)
+    &::before
+      content: '«'
+      left: -20px
+    &::after
+      content: '»'
+      right: -20px
+
++rh(500)
+  .quote
+    height: auto
+    min-height: 100vh
+
++r($desktop)
+  .quote
+    height: auto
+    min-height: 100vh
+    &__text
+      padding-left: 140px
+      padding-right: 140px
+      font-size: 35px
+      &::before, &::after
+        font-size: 380px
+
++r($tablet)
+  .quote
+    &__text
+      font-size: 30px
+      padding-left: 100px
+      padding-right: 100px
+      text-align: center
+      &::before, &::after
+        font-size: 300px
+
++r($mobile)
+  .quote
+    &__text
+      font-size: 16px
+      padding-left: 80px
+      padding-right: 80px
+      &::before, &::after
+        font-size: 240px

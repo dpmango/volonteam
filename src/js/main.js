@@ -136,7 +136,7 @@ $(document).ready(function(){
     var bb = $(my_element).get(0).getBBox();
     var cx = bb.x + bb.width / 2;
     var cy = bb.y + bb.height / 2;
-    
+
     var bodyStyle = "<style>"+ " ." + $(my_element).attr('class').split(' ')[1] + " { transform-origin: "+cx + 'px ' + cy + 'px'+"; }</style>"
     $( bodyStyle ).appendTo( "body" )
   }
@@ -232,7 +232,7 @@ $(document).ready(function(){
       // })
       var logo = $('[js-scroll-logo] svg')
       var logoLetters = $('[js-scroll-logo] svg .logo-letter')
-      var sizePowerScale = 1 - (scrollTop / wHeight / 5)
+      var sizePowerScale = 1 - (scrollTop / wHeight / 3)
       var sizePowerScaleInvert = 1 + (scrollTop / wHeight / 2)
       var sizePowerX =  (scrollTop / wHeight) * 70
 

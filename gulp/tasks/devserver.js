@@ -27,9 +27,7 @@ gulp.task('server', function() {
     logFileChanges: true,
     open: Boolean(util.env.open || true),
     notify: false,
-    ghostMode: false,
-    online: Boolean(util.env.tunnel),
-    tunnel: util.env.tunnel || null
+    ghostMode: false
   });
 });
 

@@ -4,16 +4,16 @@ $sprite: (
 		offset-y: 0px,
 		width: 62px,
 		height: 43px,
-		total-width: 195px,
+		total-width: 237px,
 		total-height: 158px,
 		image: '../img/sprite.png'
 	),
 	benefits-2: (
-		offset-x: -133px,
-		offset-y: -53px,
+		offset-x: -66px,
+		offset-y: -66px,
 		width: 40px,
 		height: 38px,
-		total-width: 195px,
+		total-width: 237px,
 		total-height: 158px,
 		image: '../img/sprite.png'
 	),
@@ -22,16 +22,16 @@ $sprite: (
 		offset-y: -132px,
 		width: 90px,
 		height: 26px,
-		total-width: 195px,
+		total-width: 237px,
 		total-height: 158px,
 		image: '../img/sprite.png'
 	),
 	benefits-4: (
-		offset-x: -66px,
-		offset-y: -66px,
+		offset-x: -205px,
+		offset-y: 0px,
 		width: 32px,
 		height: 38px,
-		total-width: 195px,
+		total-width: 237px,
 		total-height: 158px,
 		image: '../img/sprite.png'
 	),
@@ -40,7 +40,7 @@ $sprite: (
 		offset-y: 0px,
 		width: 56px,
 		height: 56px,
-		total-width: 195px,
+		total-width: 237px,
 		total-height: 158px,
 		image: '../img/sprite.png'
 	),
@@ -49,7 +49,7 @@ $sprite: (
 		offset-y: -66px,
 		width: 56px,
 		height: 56px,
-		total-width: 195px,
+		total-width: 237px,
 		total-height: 158px,
 		image: '../img/sprite.png'
 	),
@@ -58,7 +58,16 @@ $sprite: (
 		offset-y: 0px,
 		width: 57px,
 		height: 56px,
-		total-width: 195px,
+		total-width: 237px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	scrolldown: (
+		offset-x: -133px,
+		offset-y: -53px,
+		width: 49px,
+		height: 48px,
+		total-width: 237px,
 		total-height: 158px,
 		image: '../img/sprite.png'
 	),
@@ -138,4 +147,7 @@ $sprite: (
 	}
 	.icon-fond-3 {
 		@include sprite(fond-3)
+	}
+	.icon-scrolldown {
+		@include sprite(scrolldown)
 	}

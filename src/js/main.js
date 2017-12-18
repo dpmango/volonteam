@@ -61,10 +61,10 @@ $(document).ready(function(){
 
 	// Smoth scroll
 	$('a[href^="#section"]').click( function() {
-        var el = $(this).attr('href');
-        $('body, html').animate({
-            scrollTop: $(el).offset().top}, 1000);
-        return false;
+    var el = $(this).attr('href');
+    $('body, html').animate({
+        scrollTop: $(el).offset().top}, 1000);
+    return false;
 	});
 
   // HEADER SCROLL
@@ -113,6 +113,12 @@ $(document).ready(function(){
   //     $(val).removeClass('active')
   //   }
   // });
+
+  // scrolldown
+  $('[js-scrolldown]').on('click', function(){
+    $('body, html').animate({
+        scrollTop: $(this).closest('.section').next().offset().top}, 1000);
+  })
 
   //////////
   // FULLPAGE
@@ -245,7 +251,6 @@ $(document).ready(function(){
       } else if (nextSectionNum === i){
         // normal scroll for current section
         var changedHeight = scrollTop - (Math.abs(wHeightPrev - wHeight) * i)
-        console.log(changedHeight, $(section))
         $(section).css({
           'transform': 'translate3d(0,-'+changedHeight+'px,0)'
         })
@@ -266,6 +271,8 @@ $(document).ready(function(){
     });
 
     // reset header
+    var header = $('.header')
+
     header.addClass('is-fixed');
     header.css({
       'transform': 'translate3d(0,-'+0+'px,0)'
@@ -310,7 +317,21 @@ $(document).ready(function(){
     slidesToShow: 3,
     slidesToScroll: 1,
     centerMode: false,
-    variableWidth: false
+    variableWidth: false,
+    responsive: [
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 2,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        }
+      },
+    ]
   });
 
   $('[js-full-slider]').slick({
@@ -334,7 +355,7 @@ $(document).ready(function(){
 
     parent.addClass('is-active').siblings().removeClass('is-active');
 
-    console.log(parent.parent().parent().find('[js-full-slider]'))
+    // console.log(parent.parent().parent().find('[js-full-slider]'))
     parent.parent().parent().find('[js-full-slider]').slick('slickGoTo', slideNum - 1)
   })
   //////////

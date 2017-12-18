@@ -6,12 +6,16 @@ extends shared/_layout
 block content
   
   
-  // SECTION
+  // HERO SECTION :: START
   .section(data-section=1)
     img.section-bg(src='img/sectionHero.jpg' srcset='img/sectionHero@2x.jpg 2x')
     .container
       .section__logo(js-scroll-logo)
         include ../icons/logo.svg
+      .section__logo-mobile
+        +icon('ico-logo-mobile')
+      .section__scrolldown(js-scrolldown)
+        i.icon.icon-scrolldown
   
   // SECTION
   .section(data-section=2)
@@ -37,7 +41,7 @@ block content
           span Помочь НКО
               
   // REQUEST :: START
-  .section.section--dark(data-section=3)
+  .section.section--dark.section--with-scrolldown(data-section=3)
     .container
       .p-title.p-title--white Актуальные <br> запросы от НКО
       
@@ -84,7 +88,9 @@ block content
             .request-card__cta
               a(href="#").btn.btn-primary
                 span помочь
-          
+        
+        .section__scrolldown(js-scrolldown)
+          i.icon.icon-scrolldown
         
         
   // SECTION
@@ -171,7 +177,12 @@ block content
         .pro-bono-card
           .pro-bono-card__name Какой смысл ввязываться, если у меня почти нет времени?
           .pro-bono-card__description Мы стараемся сделать так, чтобы каждый специалист тратил ровно столько времени, сколько ему комфортно. Наши чатботы сами по себе экономят время, кроме того вы можете установить максимальное количество часов в месяц и удобные дни недели и часы для консультаций.
-    
+      
+      .more-btn
+        .more-btn__caption Еще
+        .more-btn__icon
+          +icon('ico-slick-next')
+      
   // QUOTES :: START
   .section(data-section=7)
 

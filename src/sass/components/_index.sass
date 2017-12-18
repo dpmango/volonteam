@@ -15,6 +15,10 @@
     z-index: 5
   &--dark
     background: $colorPrimary
+  &--with-scrolldown
+    +r($desktop)
+      .container
+        padding-bottom: 80px
   &-bg
     position: absolute
     top: 50%
@@ -42,6 +46,50 @@
         transform-origin: center center
       #logo-letter
         transform-origin: center center
+  &__logo-mobile
+    display: none
+    margin: auto
+    text-align: center
+    font-size: 15px
+    color: white
+  &__scrolldown
+    display: none
+    position: absolute
+    bottom: 30px
+    left: 50%
+    transform: translateX(-50%)
+    cursor: pointer
+    animation: scrolldown 2.5s easeOutQuad infinite
+    +tr
+    &:hover
+      animation-name: none
+      transform: translateX(-50%) scale(1.1)
+
+@keyframes scrolldown
+  0%
+    transform: translateX(-50%) scale(1)
+  50%
+    transform: translateX(-50%) scale(0.75)
+  100%
+    transform: translateX(-50%) scale(1)
+
++rh(500)
+  .section
+    height: auto
+    min-height: 100vh
+
++r($desktop)
+  .section
+    height: auto
+    min-height: 100vh
+    &__logo
+      display: none
+    &__logo-mobile
+      display: block
+    &__scrolldown
+      display: inline-block
+      z-index: 3
+
 
 .no-pointers
   pointer-events: none
@@ -66,11 +114,48 @@
   color: $colorOrange
   border-bottom: 2px dashed $colorOrange
 
+
++rh(500)
+  .p-title
+    margin-top: calc(15px + 50px)
+    font-size: 45px
+
++r($desktop)
+  .p-title
+    margin-top: calc(15px + 50px)
+    font-size: 45px
+
++r($tablet)
+  .p-title
+    font-size: 38px
+
+  .p-center-text
+    font-size: 25px
+    max-width: 460px
+
++r($mobile)
+  .p-title
+    font-size: 26px
+
+  .p-center-text
+    font-size: 16px
+    max-width: 230px
+    text-align: center
+
+
+
 .cta-buttons
   display: flex
   justify-content: flex-end
   align-items: stretch
   margin-bottom: 70px
+
++r($tablet)
+  .cta-buttons
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    margin-bottom: 25px
 
 .cta-choice
   position: relative
@@ -150,6 +235,30 @@
       transform: translate3d(0,0px,0)
 
 
++r($tablet)
+  .cta-choice
+    margin-bottom: 18px
+    margin-right: 0
+    &__trigger
+      span
+        font-size: 13px
+        letter-spacing: 0.51px
+      &-icon
+        size: 35px
+        .ico
+          &-expand
+            font-size: 18px
+          &-close
+            font-size: 0
+        &.is-opened
+          .ico
+            &-expand
+              font-size: 0
+            &-close
+              font-size: 14px
+    &__options
+      padding-bottom: 70px
+
 .cta-help
   background: $colorPrimary
   display: flex
@@ -167,6 +276,13 @@
     border-radius: 50%
   &:hover
     opacity: .7
+
++r($tablet)
+  .cta-help
+    span
+      font-size: 13px
+      letter-spacing: .51px
+      padding: 12px 30px
 
 
 /* request slider
@@ -244,14 +360,25 @@
     margin-top: 40px
 
 
++r($desktop)
+  .request-slider
+    padding-left: 45px
+    padding-right: 45px
+    .slick-next, .slick-prev
+      size: 35px
+      font-size: 15px
+  .request-card
+    max-width: 100%
 
 
 /* benefits
 
 .benefits-wrap
   display: flex
+  flex-wrap: wrap
   margin-top: auto
   margin-bottom: 5vh
+  padding: 50px 0
 
 /* Benefit card
 .benefit-card
@@ -275,17 +402,42 @@
     letter-spacing: 0.8px
     line-height: 1.2
 
-+r($tablet)
++r($desktop)
   .benefit-card
     flex-basis: 50%
     width: 50%
+    &__name
+      margin-top: 5px
+      font-size: 22px
+    &__description
+      margin-top: 20px
+      font-size: 16px
 
++r($mobile)
+  .benefits-wrap
+    flex-direction: column
+    flex-wrap: nowrap
 
+  .benefit-card
+    flex: 0 0 auto
+    width: 100%
+    max-width: 180px
+    margin-left: auto
+    margin-right: auto
+    &__name
+      font-size: 17px
+      letter-spacing: .75px
+    &__description
+      margin-top: 10px
+      font-size: 13px
 
 /* Pro bono
 .pro-bono-wrap
   display: flex
+  flex-wrap: wrap
   margin-top: auto
+  padding-top: 50px
+  padding-bottom: 30px
   margin-bottom: 5vh
   color: $fontColor
 
@@ -310,10 +462,80 @@
     line-height: 1.46
 
 
++r($desktop)
+  .pro-bono-wrap
+
+  .pro-bono-card
+    &__name
+      font-size: 22px
+      min-height: 80px
+    &__description
+      font-size: 14px
+
 +r($tablet)
   .pro-bono-card
     flex-basis: 50%
     width: 50%
+    &:nth-child(n+3)
+      display: none
+
++r($mobile)
+  .pro-bono-wrap
+    flex-direction: column
+
+  .pro-bono-card
+    flex: 0 0 auto
+    width: 100%
+    &:nth-child(n+2)
+      display: none
+
+    &__name
+      font-size: 17px
+      letter-spacing: 0.75px
+      min-height: 1px
+
+    &__description
+      font-size: 13px
+
+
+.more-btn
+  display: flex
+  max-width: 190px
+  margin-left: auto
+  margin-right: auto
+  align-items: center
+  margin-top: 50px
+  margin-bottom: 50px
+  padding: 8px 12px 8px 40px
+  background: rgba(white, .6)
+  border-radius: 50px
+  cursor: pointer
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10)
+  &__caption
+    font-size: 16px
+    letter-spacing: 0.71px
+    line-height: 1.18
+  &__icon
+    position: relative
+    display: inline-block
+    background: white
+    size: 55px
+    margin-left: 20px
+    border-radius: 50%
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10)
+    color: $colorPrimary
+    cursor: pointer
+    +tr
+    .ico
+      position: absolute
+      top: 56%
+      left: 50%
+      transform: translate(-50%,-50%) rotate(90deg)
+      +tr
+      font-size: 23px
+  &:hover
+    .more-btn__icon
+      opacity: .7
 
 
 /* quote

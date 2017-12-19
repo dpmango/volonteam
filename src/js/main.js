@@ -81,7 +81,6 @@ $(document).ready(function(){
     }
   },10));
 
-
   // HAMBURGER TOGGLER
   $('[js-hamburger]').on('click', function(e){
     $(this).toggleClass('is-active');
@@ -102,17 +101,6 @@ $(document).ready(function(){
     $('[js-hamburger]').toggleClass('is-active');
     $('.mobile-navi').toggleClass('is-active');
   }
-
-  // SET ACTIVE CLASS IN HEADER
-  // * could be removed in production and server side rendering
-  // user .active for li instead
-  // $('.header__menu li').each(function(i,val){
-  //   if ( $(val).find('a').attr('href') == window.location.pathname.split('/').pop() ){
-  //     $(val).addClass('active');
-  //   } else {
-  //     $(val).removeClass('active')
-  //   }
-  // });
 
   // scrolldown
   $('[js-scrolldown]').on('click', function(){
@@ -148,10 +136,41 @@ $(document).ready(function(){
   //////////
   // FULLPAGE
   //////////
-
   var sections = $('.section');
+  var sectionsHeights = [];
+  var sectionsBreakPoints = [];
   var wHeight = _window.height();
   var wHeightPrev = 0;
+  var whenFooterStarts = 0
+  var whenScrollStops = 0
+
+  function setSectionHeight(){
+    sectionsHeights = [];
+    sections.each(function(i, section){
+      // get sections Heights
+      sectionsHeights.push ( Math.floor( $(section).outerHeight() ))
+
+      // get breakpoints
+      var hBreakpoint = sectionsBreakPoints[sectionsBreakPoints.length-1] + $(section).outerHeight();
+      if ( !hBreakpoint ){
+        sectionsBreakPoints.push ( Math.floor( $(section).outerHeight() )) // push first when array is empty
+      } else {
+        sectionsBreakPoints.push ( Math.floor(hBreakpoint) )
+      }
+    })
+
+    // set Footer and scrollStop
+    $.each(sectionsHeights, function(i, sectionHeight){
+      whenFooterStarts += sectionsHeights[i]
+      if ( i === sectionsHeights.length - 1 ){
+        whenFooterStarts = whenFooterStarts - sectionsHeights[i]
+      }
+    });
+
+    whenScrollStops = whenFooterStarts + $('.footer').outerHeight()
+
+  }
+  // call goesw to slick init
 
   function listenScroll(){
     var scrollTop = 0;
@@ -159,6 +178,7 @@ $(document).ready(function(){
     _window.on('wheel', function(e){
 
       if ( _mobileDevice || _window.width() < 992 || _window.height() < 500 ){
+        // do nothing
 
       } else {
 
@@ -177,8 +197,10 @@ $(document).ready(function(){
           return false
         }
 
-        // don't scroll past bottom and reset val
-        if ( scrollTop > (sections.length - 1) * wHeight ){
+        console.log(scrollTop, sectionsBreakPoints)
+
+        // scroll footer when all sections scrolled
+        if ( scrollTop > whenFooterStarts ){
           // scrollTop = (sections.length - 1) * wHeight
           $('.footer').css({
             'transform': 'translate3d(0,-'+Math.round(scrollTop)+'px,0)',
@@ -191,9 +213,10 @@ $(document).ready(function(){
           })
         }
 
-        if ( scrollTop > (sections.length - 1) * wHeight + $('.footer').outerHeight() ){
-          scrollTop = (sections.length - 1) * wHeight + $('.footer').outerHeight();
-
+        // don't scroll past sections and footer
+        // (sections.length - 1) * wHeight + $('.footer').outerHeight()
+        if ( scrollTop > whenScrollStops ){
+          scrollTop = whenScrollStops;
           return false
         }
 
@@ -211,7 +234,8 @@ $(document).ready(function(){
         resetSections();
       }else{
         wHeight = _window.height();
-        resizeScroll(scrollTop);
+        setSectionHeight();
+        resizeScroll( Math.floor(scrollTop) );
         setTimeout(function(){
           wHeightPrev = _window.height(); // update prevheight for reset calcultations
         }, 50)
@@ -222,36 +246,42 @@ $(document).ready(function(){
 
   function scrollBy(scrollTop){
     // SECTION ACTIONS
-    var nextSectionNum = Math.floor(scrollTop / wHeight) + 1;
+    // var nextSectionNum = Math.floor(scrollTop / wHeight) + 1;
+    var nextSectionNum = 0;
+
+    $.each(sectionsBreakPoints, function(i,sectionBP){
+      var overflowDiff = sectionsHeights[i+1] - sectionsHeights[i]
+      if ( !overflowDiff || overflowDiff < 0 ){
+        overflowDiff = 0
+      }
+      // console.log(
+      //   'section #' + i + ' BP = ' + sectionBP,
+      //   'overflowDiff ' + overflowDiff,
+      //   'sectionBP + overflowDiff = ' + (sectionBP + overflowDiff),
+      //   'scroll ' + scrollTop)
+
+      if ( (sectionBP + overflowDiff) > scrollTop ){
+        nextSectionNum = i + 1;
+        return false;
+      }
+    });
+
     var nextSection = sections[nextSectionNum]
+
     $(nextSection).css({
       'transform': 'translate3d(0,-'+scrollTop+'px,0)'
     })
 
     $(nextSection).addClass('is-current').siblings().removeClass('is-current');
 
+    // logo scale tranform
     if ( nextSectionNum === 1){
-      // var logoDashes = $('[js-scroll-logo] svg .logo-dash')
-      // var logoLetters = $('[js-scroll-logo] svg .logo-letter')
-      // var sizePowerScale = 1 - (scrollTop / wHeight / 3)
-      // var sizePowerX =  (scrollTop / wHeight) * 70
-      //
-      // logoDashes.css({
-      //   'transform': 'scale('+sizePowerScale+')'
-      // })
-      //
-      // logoLetters.css({
-      //   'transform': 'translateX('+sizePowerX+'px)'
-      // })
       var logo = $('[js-scroll-logo] svg')
       var logoLetters = $('[js-scroll-logo] svg .logo-letter')
       var sizePowerScale = 1 - (scrollTop / wHeight / 3)
       var sizePowerScaleInvert = 1 + (scrollTop / wHeight / 2)
       var sizePowerX =  (scrollTop / wHeight) * 70
-
-      // issue with transform origin
-      // get boundings ?? bBox()
-
+      // tranform origin is preset with onload functions
       logo.css({
         'transform': 'scale('+sizePowerScale+')'
       })
@@ -260,8 +290,7 @@ $(document).ready(function(){
       })
     }
 
-    // HEADER ANIMATION - scroll 80% of first screen
-    // var whenHeaderMoves = (scrollTop / wHeight) + 1 > 1.8
+    // HEADER ANIMATION
     var header = $('.header')
     var whenHeaderMoves = Math.floor(scrollTop / ( wHeight - header.outerHeight() ) ) + 1
 
@@ -278,7 +307,26 @@ $(document).ready(function(){
   }
 
   function resizeScroll(scrollTop){
-    var nextSectionNum = Math.floor(scrollTop / wHeight) + 1;
+    // var nextSectionNum = Math.floor(scrollTop / wHeight) + 1;
+
+    var nextSectionNum = 0;
+
+    $.each(sectionsBreakPoints, function(i,sectionBP){
+      var overflowDiff = sectionsHeights[i+1] - sectionsHeights[i]
+      if ( !overflowDiff || overflowDiff < 0 ){
+        overflowDiff = 0
+      }
+      // console.log(
+      //   'section #' + i + ' BP = ' + sectionBP,
+      //   'overflowDiff ' + overflowDiff,
+      //   'sectionBP + overflowDiff = ' + (sectionBP + overflowDiff),
+      //   'scroll ' + scrollTop)
+
+      if ( (sectionBP + overflowDiff) > scrollTop ){
+        nextSectionNum = i + 1;
+        return false;
+      }
+    });
 
     sections.each(function(i, section){
       if ( nextSectionNum < i ){
@@ -303,9 +351,7 @@ $(document).ready(function(){
 
   function resetSections(){
     sections.each(function(i, section){
-      $(section).css({
-        'transform': 'translate3d(0,-'+0+'px,0)'
-      })
+      $(section).attr('style', "")
     });
     $('.footer').attr('style', "")
 
@@ -313,9 +359,7 @@ $(document).ready(function(){
     var header = $('.header')
 
     header.addClass('is-fixed');
-    header.css({
-      'transform': 'translate3d(0,-'+0+'px,0)'
-    })
+    header.attr('style', "")
 
   }
 
@@ -372,6 +416,10 @@ $(document).ready(function(){
 
   var slickNextArrow = '<div class="slick-prev"><svg class="ico ico-slick-prev"><use xlink:href="img/sprite.svg#ico-slick-prev"></use></svg></div>';
   var slickPrevArrow = '<div class="slick-next"><svg class="ico ico-slick-next"><use xlink:href="img/sprite.svg#ico-slick-next"></use></svg></div>'
+
+  $('[js-slider-requests]').on('init', function(event, slick){
+    setSectionHeight();
+  });
 
   $('[js-slider-requests]').slick({
     autoplay: false,

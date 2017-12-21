@@ -7,12 +7,12 @@ block content
   
   
   // HERO SECTION :: START
-  .section(data-section=1)
+  .section.section--under-bg-dark(data-section=1)
     img.section-bg(src='img/sectionHero.jpg' srcset='img/sectionHero@2x.jpg 2x')
     .container
       .section__logo(js-scroll-logo)
         include ../icons/logo.svg
-      .section__logo-mobile
+      .section__logo---under-bg-darkmobile
         +icon('ico-logo-mobile')
       .section__scrolldown(js-scrolldown)
         i.icon.icon-scrolldown
@@ -213,7 +213,7 @@ block content
       .quote
         .quote__mobile-logo
           img(src='img/partnerLogo_2.png' srcset='img/partnerLogo_2@2x.png 2x')
-        .quote__text С помощью платформы «Волонтим» квалифицированные специалисты смогут поделиться своей экспертизой и сделать доброе дело 
+        .quote__text.quote__text--smaller С помощью платформы «Волонтим» квалифицированные специалисты смогут поделиться своей экспертизой и сделать доброе дело 
       //- .quote
       //-   .quote__mobile-logo
       //-     img(src='img/partnerLogo_3.png' srcset='img/partnerLogo_3@2x.png 2x')

@@ -258,6 +258,7 @@ $(document).ready(function(){
     // var nextSectionNum = Math.floor(scrollTop / wHeight) + 1;
     var nextSectionNum = 0;
 
+    // console.log(sectionsBreakPoints, scrollTop)
     $.each(sectionsBreakPoints, function(i,sectionBP){
 
       // console.log(
@@ -274,9 +275,23 @@ $(document).ready(function(){
 
     var nextSection = sections[nextSectionNum]
 
-    $(nextSection).css({
-      'transform': 'translate3d(0,-'+scrollTop+'px,0)'
+    sections.each(function(i, section){
+      var bp = sectionsBreakPoints[i]
+
+      if ( bp > scrollTop ){
+        // sections greater that breakpoint
+        $(sections[i + 1]).css({
+          'transform': 'translate3d(0,-'+scrollTop+'px,0)'
+        });
+      } else if ( bp - sectionsBreakPoints[i - 1] < scrollTop){
+        $(section).css({
+          'transform': 'translate3d(0,-'+(sectionsBreakPoints[i - 1])+'px,0)'
+        });
+      }
     })
+    // $(nextSection).css({
+    //   'transform': 'translate3d(0,-'+scrollTop+'px,0)'
+    // })
     // $(nextSection).css({
     //   'transform': 'translateY(-'+scrollTop+'px)'
     // })
@@ -369,6 +384,13 @@ $(document).ready(function(){
 
   }
 
+  // scrollTo
+  $('[js-scroll-to]').on('click', function(){
+    var section = $(this).data('section');
+
+    scrollTop = sectionsBreakPoints[section - 2]
+    scrollBy(scrollTop)
+  })
 
   //////////
   // TOGGLERS, ETC

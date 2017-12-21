@@ -160,7 +160,14 @@ $(document).ready(function(){
       if ( !hBreakpoint ){
         sectionsBreakPoints.push ( Math.floor( $(section).outerHeight() )) // push first when array is empty
       } else {
+        var overflowDiff = sectionsHeights[i] - _window.height()
+
+        if ( !overflowDiff || overflowDiff < 0 ){
+          overflowDiff = 0
+        }
+
         sectionsBreakPoints.push ( Math.floor(hBreakpoint) )
+        sectionsBreakPoints[i-1] = sectionsBreakPoints[i-1] + overflowDiff
       }
     })
 
@@ -252,19 +259,14 @@ $(document).ready(function(){
     var nextSectionNum = 0;
 
     $.each(sectionsBreakPoints, function(i,sectionBP){
-      // var overflowDiff = sectionsHeights[i+1] - sectionsHeights[i]
-      var overflowDiff = sectionsHeights[i+1] - _window.height()
 
-      if ( !overflowDiff || overflowDiff < 0 ){
-        overflowDiff = 0
-      }
       // console.log(
       //   'section #' + i + ' BP = ' + sectionBP,
       //   'overflowDiff ' + overflowDiff,
       //   'sectionBP + overflowDiff = ' + (sectionBP + overflowDiff),
       //   'scroll ' + scrollTop)
 
-      if ( (sectionBP + overflowDiff) > scrollTop ){
+      if ( sectionBP > scrollTop ){
         nextSectionNum = i + 1;
         return false;
       }
@@ -322,14 +324,7 @@ $(document).ready(function(){
     var nextSectionNum = 0;
 
     $.each(sectionsBreakPoints, function(i,sectionBP){
-      // var overflowDiff = sectionsHeights[i+1] - sectionsHeights[i]
-      var overflowDiff = sectionsHeights[i+1] - _window.height()
-
-      if ( !overflowDiff || overflowDiff < 0 ){
-        overflowDiff = 0
-      }
-
-      if ( (sectionBP + overflowDiff) > scrollTop ){
+      if ( sectionBP > scrollTop ){
         nextSectionNum = i + 1;
         return false;
       }

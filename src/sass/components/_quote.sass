@@ -14,16 +14,16 @@
     margin: auto
     font-size: 40px
     line-height: 1.25
-    color: $colorOrange
+    // color: $colorOrange
     &::before, &::after
       position: absolute
-      top: 0%
+      top: calc(50% - 30px)
       display: inline-block
       font-size: 450px
       line-height: .2
       color: $colorOrange
       opacity: .5
-      // transform: translateY(-50%)
+      transform: translateY(-50%)
     &::before
       content: '«'
       left: -20px

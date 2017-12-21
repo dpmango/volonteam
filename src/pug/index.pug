@@ -197,10 +197,10 @@ block content
           .pro-bono-card__name Какой смысл ввязываться, если у меня почти нет времени?
           .pro-bono-card__description Мы стараемся сделать так, чтобы каждый специалист тратил ровно столько времени, сколько ему комфортно. Наши чатботы сами по себе экономят время, кроме того вы можете установить максимальное количество часов в месяц и удобные дни недели и часы для консультаций.
       
-      .more-btn(js-more-bono)
-        .more-btn__caption Еще
-        .more-btn__icon
-          +icon('ico-slick-next')
+      //- .more-btn(js-more-bono)
+      //-   .more-btn__caption Еще
+      //-   .more-btn__icon
+      //-     +icon('ico-slick-next')
       
   // QUOTES :: START
   .section(data-section=7)
@@ -209,24 +209,24 @@ block content
       .quote
         .quote__mobile-logo
           img(src='img/partnerLogo_1.png' srcset='img/partnerLogo_1@2x.png 2x')
-        .quote__text цитата Только так можно <br> создать общество, в котором <br> будет приятно жить цитата 
+        .quote__text Volonteam объединяет НКО и специалистов, готовых помогать своей экспертизой.
       .quote
         .quote__mobile-logo
           img(src='img/partnerLogo_2.png' srcset='img/partnerLogo_2@2x.png 2x')
-        .quote__text цитата Только так можно <br> создать общество, в котором <br> будет приятно жить цитата 
-      .quote
-        .quote__mobile-logo
-          img(src='img/partnerLogo_3.png' srcset='img/partnerLogo_3@2x.png 2x')
-        .quote__text цитата Только так можно <br> создать общество, в котором <br> будет приятно жить цитата 
-      .quote
-        .quote__mobile-logo
-          img(src='img/partnerLogo_4.png' srcset='img/partnerLogo_4@2x.png 2x')
-        .quote__text цитата Только так можно <br> создать общество, в котором <br> будет приятно жить цитата 
-      .quote
-        .quote__mobile-logo
-          img(src='img/partnerLogo_5.png' srcset='img/partnerLogo_5@2x.png 2x')
-        .quote__text цитата Только так можно <br> создать общество, в котором <br> будет приятно жить цитата 
-      
+        .quote__text С помощью платформы «Волонтим» квалифицированные специалисты смогут поделиться своей экспертизой и сделать доброе дело 
+      //- .quote
+      //-   .quote__mobile-logo
+      //-     img(src='img/partnerLogo_3.png' srcset='img/partnerLogo_3@2x.png 2x')
+      //-   .quote__text Volonteam объединяет НКО и специалистов, готовых помогать своей экспертизой.
+      //- .quote
+      //-   .quote__mobile-logo
+      //-     img(src='img/partnerLogo_4.png' srcset='img/partnerLogo_4@2x.png 2x')
+      //-   .quote__text цитата Только так можно <br> создать общество, в котором <br> будет приятно жить цитата 
+      //- .quote
+      //-   .quote__mobile-logo
+      //-     img(src='img/partnerLogo_5.png' srcset='img/partnerLogo_5@2x.png 2x')
+      //-   .quote__text цитата Только так можно <br> создать общество, в котором <br> будет приятно жить цитата 
+      //- 
     .slider-controls.slider-controls--orange
       .slider-control(data-slide="1").is-active
         .slider-control__dot
@@ -234,16 +234,16 @@ block content
       .slider-control(data-slide="2")
         .slider-control__dot
           img(src='img/partnerLogo_2.png' srcset='img/partnerLogo_2@2x.png 2x')
-      .slider-control(data-slide="3")
-        .slider-control__dot
-          img(src='img/partnerLogo_3.png' srcset='img/partnerLogo_3@2x.png 2x')
-      .slider-control(data-slide="4")
-        .slider-control__dot
-          img(src='img/partnerLogo_4.png' srcset='img/partnerLogo_4@2x.png 2x')
-      .slider-control(data-slide="5")
-        .slider-control__dot
-          img(src='img/partnerLogo_5.png' srcset='img/partnerLogo_5@2x.png 2x')
-            
+      //- .slider-control(data-slide="3")
+      //-   .slider-control__dot
+      //-     img(src='img/partnerLogo_3.png' srcset='img/partnerLogo_3@2x.png 2x')
+      //- .slider-control(data-slide="4")
+      //-   .slider-control__dot
+      //-     img(src='img/partnerLogo_4.png' srcset='img/partnerLogo_4@2x.png 2x')
+      //- .slider-control(data-slide="5")
+      //-   .slider-control__dot
+      //-     img(src='img/partnerLogo_5.png' srcset='img/partnerLogo_5@2x.png 2x')
+      //- 
     // scrolldown
     .section__scrolldown.section__scrolldown--dark(js-scrolldown)
       i.icon.icon-scrolldown-dark        
@@ -251,7 +251,7 @@ block content
   // CTA :: START
   .section.section--dark(data-section=8)
     .container
-      .p-title Частью третьего сектора может быть каждый
+      .p-title.p-title--white Частью третьего сектора может быть каждый
       .cta-form
         .cta-form__head Только так можно создать общество, в котором будет приятно жить
         form(action="#" js-validate-join).cta-form__capture

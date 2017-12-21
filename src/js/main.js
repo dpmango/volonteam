@@ -173,14 +173,13 @@ $(document).ready(function(){
     });
 
     whenScrollStops = whenFooterStarts + $('.footer').outerHeight()
-
   }
   // call goesw to slick init
 
 
-  _window.on('wheel', function(e){
+  _window.on('wheel', throttle(function(e){
     listenScroll(e);
-  });
+  }, 10));
 
   function listenScroll(e){
     if ( _mobileDevice || _window.width() < 992 || _window.height() < 500 ){
@@ -225,7 +224,7 @@ $(document).ready(function(){
       }
 
       wHeightPrev = _window.height(); // update prevheight for reset calcultations
-      scrollBy(Math.round(scrollTop))
+      scrollBy(Math.round(scrollTop), delta)
 
       e.preventDefault();
 
@@ -247,7 +246,7 @@ $(document).ready(function(){
 
   }, 100));
 
-  function scrollBy(scrollTop){
+  function scrollBy(scrollTop, delta){
     // SECTION ACTIONS
     // var nextSectionNum = Math.floor(scrollTop / wHeight) + 1;
     var nextSectionNum = 0;
@@ -259,11 +258,11 @@ $(document).ready(function(){
       if ( !overflowDiff || overflowDiff < 0 ){
         overflowDiff = 0
       }
-      console.log(
-        'section #' + i + ' BP = ' + sectionBP,
-        'overflowDiff ' + overflowDiff,
-        'sectionBP + overflowDiff = ' + (sectionBP + overflowDiff),
-        'scroll ' + scrollTop)
+      // console.log(
+      //   'section #' + i + ' BP = ' + sectionBP,
+      //   'overflowDiff ' + overflowDiff,
+      //   'sectionBP + overflowDiff = ' + (sectionBP + overflowDiff),
+      //   'scroll ' + scrollTop)
 
       if ( (sectionBP + overflowDiff) > scrollTop ){
         nextSectionNum = i + 1;
@@ -276,8 +275,15 @@ $(document).ready(function(){
     $(nextSection).css({
       'transform': 'translate3d(0,-'+scrollTop+'px,0)'
     })
+    // $(nextSection).css({
+    //   'transform': 'translateY(-'+scrollTop+'px)'
+    // })
 
     $(nextSection).addClass('is-current').siblings().removeClass('is-current');
+
+    if ( delta < 0 ){
+      // console.log('scrolling top')
+    }
 
     // logo scale tranform
     if ( nextSectionNum === 1){
@@ -344,6 +350,10 @@ $(document).ready(function(){
         //   'transform': 'translate3d(0,-'+ sectionsHeights[i] +'px,0)'
         // })
       }
+      var nextSection = sections[nextSectionNum]
+
+      $(nextSection).addClass('is-current').siblings().removeClass('is-current');
+
     });
 
     $('.footer').attr('style', "")
@@ -391,6 +401,9 @@ $(document).ready(function(){
     } else if ( _window.width() > 1 ){
       $('.pro-bono-card:nth-child(n+2)').fadeIn();
     }
+    setTimeout(function(){
+      setSectionHeight();
+    },300)
   })
 
   _window.on('resize', debounce(function(){
@@ -462,15 +475,17 @@ $(document).ready(function(){
     variableWidth: false
   });
 
+  $('[js-full-slider]').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+    var linkedControl = $(slick.$slider).closest('.section').find('.slider-control[data-slide='+ (nextSlide + 1) +']');
+    linkedControl.addClass('is-active').siblings().removeClass('is-active');
+  });
+
   // slider full controls
   $('.slider-control__dot').on('click', function(){
-    var parent = $(this).parent();
-    var slideNum = parent.data('slide');
-
-    parent.addClass('is-active').siblings().removeClass('is-active');
+    var slideNum = $(this).parent().data('slide');
 
     // console.log(parent.parent().parent().find('[js-full-slider]'))
-    parent.parent().parent().find('[js-full-slider]').slick('slickGoTo', slideNum - 1)
+    $(this).closest('.section').find('[js-full-slider]').slick('slickGoTo', slideNum - 1)
   })
   //////////
   // MODALS

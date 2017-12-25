@@ -185,7 +185,7 @@ $(document).ready(function(){
 
 
   _window.on('wheel', throttle(function(e){
-    listenScroll(e);
+    // listenScroll(e);
   }, 10));
 
   function listenScroll(e){
